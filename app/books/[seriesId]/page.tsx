@@ -2,12 +2,34 @@ import Image from "next/image";
 import Link from "next/link";
 import { Almarai } from "next/font/google";
 import ProductCard from "@/components/home/ProductCard";
+import JsonLd from "@/components/seo/JsonLd";
 import {
   getPublishedBookSeriesByIdentifier,
   getPublishedBooksBySeries,
 } from "@/lib/data/content";
+import { absoluteUrl, createPageMetadata, SITE_NAME, trimDescription } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: Promise<{ seriesId: string }> }) {
+  const { seriesId } = await params;
+  const series = await getPublishedBookSeriesByIdentifier(seriesId);
+
+  if (!series) {
+    return createPageMetadata({
+      title: "سلسلة كتب تعليمية",
+      path: `/books/${seriesId}`,
+      noIndex: true,
+    });
+  }
+
+  return createPageMetadata({
+    title: series.title,
+    description: trimDescription(series.description),
+    path: `/books/${series.slug || seriesId}`,
+    image: series.image || "/book-product.png",
+  });
+}
 
 const almarai = Almarai({
   subsets: ["arabic"],
@@ -41,9 +63,25 @@ export default async function SeriesDetailsPage({ params }: { params: Promise<{ 
   const { seriesId } = await params;
   const series = await getPublishedBookSeriesByIdentifier(seriesId);
   const books = series ? await getPublishedBooksBySeries(series._id) : [];
+  const seriesJsonLd = series
+    ? {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: series.title,
+        description: trimDescription(series.description),
+        image: absoluteUrl(series.image || "/book-product.png"),
+        url: absoluteUrl(`/books/${series.slug || seriesId}`),
+        publisher: {
+          "@type": "Organization",
+          name: SITE_NAME,
+          url: absoluteUrl("/"),
+        },
+      }
+    : null;
 
   return (
     <main className={`min-h-screen overflow-x-hidden bg-white ${almarai.className}`}>
+      {seriesJsonLd ? <JsonLd data={seriesJsonLd} /> : null}
       <section className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 pb-8 pt-[128px] sm:px-6 sm:pb-12 sm:pt-[150px] lg:flex-row lg:items-end lg:gap-14">
         <div className="order-2 flex-1 text-center lg:order-1 lg:text-right">
           <div className="mb-5 flex justify-center lg:justify-start">

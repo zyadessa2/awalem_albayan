@@ -1,7 +1,15 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import AdminLogoutButton from "@/components/admin/AdminLogoutButton";
 import { getCurrentAdminSession } from "@/lib/auth/session";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "لوحة التحكم",
+  path: "/admin",
+  noIndex: true,
+});
 
 const navItems = [
   { href: "/admin", label: "نظرة عامة" },

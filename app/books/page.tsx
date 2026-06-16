@@ -6,8 +6,16 @@ import {
   getPublishedBookSeries,
   getPublishedStandaloneBooks,
 } from "@/lib/data/content";
+import { createPageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+export const metadata = createPageMetadata({
+  title: "الكتب التعليمية",
+  description: "تصفح سلاسل الكتب والكتب التعليمية المنفصلة من عوالم البيان لتنمية مهارات القراءة واللغة العربية عند الأطفال.",
+  path: "/books",
+  image: "/book-product.png",
+});
 
 const almarai = Almarai({
   subsets: ["arabic"],

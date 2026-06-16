@@ -1,8 +1,16 @@
 import { Almarai } from "next/font/google";
 import ProductCard from "@/components/home/ProductCard";
 import { getPublishedCourses } from "@/lib/data/content";
+import { createPageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+export const metadata = createPageMetadata({
+  title: "الدورات التعليمية",
+  description: "اكتشف دورات عوالم البيان التعليمية للأطفال مع دروس فيديو وكتب مقترحة تساعد على تعلم القراءة واللغة العربية بطريقة ممتعة.",
+  path: "/courses",
+  image: "/course-product.png",
+});
 
 const almarai = Almarai({
   subsets: ["arabic"],

@@ -3,6 +3,14 @@ import { Almarai } from "next/font/google";
 import { FaBookOpen, FaBrain, FaSeedling } from "react-icons/fa";
 import type { IconType } from "react-icons";
 import type { ReactNode } from "react";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "من نحن",
+  description: "تعرف على عوالم البيان ورسالتها في تقديم كتب ودورات وسلاسل تعليمية تساعد الأطفال على تعلم القراءة واللغة العربية.",
+  path: "/about",
+  image: "/logo2-display.png",
+});
 
 const almarai = Almarai({
   subsets: ["arabic"],

@@ -2,9 +2,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { Almarai } from "next/font/google";
 import BookPreviewGallery from "@/components/books/BookPreviewGallery";
+import JsonLd from "@/components/seo/JsonLd";
 import { getPublishedBook } from "@/lib/data/content";
+import { absoluteUrl, createPageMetadata, SITE_NAME, trimDescription } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ seriesId: string; bookId: string }>;
+}) {
+  const { seriesId, bookId } = await params;
+  const book = await getPublishedBook(bookId);
+
+  if (!book) {
+    return createPageMetadata({
+      title: "كتاب تعليمي",
+      path: `/books/${seriesId}/${bookId}`,
+      noIndex: true,
+    });
+  }
+
+  return createPageMetadata({
+    title: book.title,
+    description: trimDescription(book.description),
+    path: `/books/${seriesId}/${book.slug || bookId}`,
+    image: book.coverImage || "/book-product.png",
+  });
+}
 
 const almarai = Almarai({
   subsets: ["arabic"],
@@ -53,9 +79,25 @@ export default async function BookDetailsPage({ params }: { params: Promise<{ se
     book?.description ||
     "كتاب تعليمي يساعد الطفل على تنمية مهارات القراءة والنطق بثقة.";
   const actionUrl = book?.whatsappUrl || book?.buyUrl || "#";
+  const bookJsonLd = book
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Book",
+        name: book.title,
+        description: trimDescription(book.description),
+        image: absoluteUrl(book.coverImage || "/book-product.png"),
+        url: absoluteUrl(`/books/${seriesId}/${book.slug || bookId}`),
+        publisher: {
+          "@type": "Organization",
+          name: SITE_NAME,
+          url: absoluteUrl("/"),
+        },
+      }
+    : null;
 
   return (
     <main className={`min-h-screen overflow-x-hidden bg-white ${almarai.className}`}>
+      {bookJsonLd ? <JsonLd data={bookJsonLd} /> : null}
       <section className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-12 pt-[128px] sm:px-6 sm:pt-[150px] lg:grid-cols-[320px_minmax(0,1fr)] lg:items-center lg:gap-16 lg:pb-16">
         <div className="order-2 flex justify-center lg:order-1 lg:justify-start">
           <div className="relative h-[230px] w-[230px] rounded-[22px] bg-[#fef6ea] sm:h-[286px] sm:w-[286px]">

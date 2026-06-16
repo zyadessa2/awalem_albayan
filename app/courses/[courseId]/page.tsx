@@ -4,6 +4,7 @@ import { Almarai } from "next/font/google";
 import { FaBook } from "react-icons/fa";
 import { FiClock, FiPlayCircle } from "react-icons/fi";
 import CoursePlaylistPlayer from "@/components/courses/CoursePlaylistPlayer";
+import JsonLd from "@/components/seo/JsonLd";
 import {
   getPublishedCourse,
   getPublishedLessonsByCourse,
@@ -11,8 +12,29 @@ import {
   type PublicCourse,
   type PublicLesson,
 } from "@/lib/data/content";
+import { absoluteUrl, createPageMetadata, SITE_NAME, trimDescription } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: Promise<{ courseId: string }> }) {
+  const { courseId } = await params;
+  const course = await getPublishedCourse(courseId);
+
+  if (!course) {
+    return createPageMetadata({
+      title: "دورة تعليمية",
+      path: `/courses/${courseId}`,
+      noIndex: true,
+    });
+  }
+
+  return createPageMetadata({
+    title: course.title,
+    description: trimDescription(course.description),
+    path: `/courses/${course.slug || courseId}`,
+    image: course.image || "/course-product.png",
+  });
+}
 
 const almarai = Almarai({
   subsets: ["arabic"],
@@ -141,9 +163,30 @@ export default async function CourseDetailsPage({ params }: { params: Promise<{ 
   const { courseId } = await params;
   const course = await getPublishedCourse(courseId);
   const lessons = course ? await getPublishedLessonsByCourse(course._id) : [];
+  const courseJsonLd = course
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        name: course.title,
+        description: trimDescription(course.description),
+        image: absoluteUrl(course.image || "/course-product.png"),
+        url: absoluteUrl(`/courses/${course.slug || courseId}`),
+        provider: {
+          "@type": "Organization",
+          name: SITE_NAME,
+          url: absoluteUrl("/"),
+        },
+        hasCourseInstance: {
+          "@type": "CourseInstance",
+          courseMode: "online",
+          courseWorkload: course.durationLabel || undefined,
+        },
+      }
+    : null;
 
   return (
     <main className={`min-h-screen overflow-x-hidden bg-white ${almarai.className}`}>
+      {courseJsonLd ? <JsonLd data={courseJsonLd} /> : null}
       <HeroSection course={course} lessons={lessons} />
       <div id="course-lessons">
         <CoursePlaylistPlayer lessons={lessons} youtubePlaylistUrl={course?.youtubePlaylistUrl} />

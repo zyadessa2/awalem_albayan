@@ -4,8 +4,15 @@ import CoursesSection from "@/components/home/CoursesSection";
 import Features from "@/components/home/Features";
 import Hero from "@/components/home/Hero";
 import JourneySection from "@/components/home/JourneySection";
+import JsonLd from "@/components/seo/JsonLd";
+import { absoluteUrl, createPageMetadata, DEFAULT_DESCRIPTION, SITE_NAME } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+export const metadata = createPageMetadata({
+  description: DEFAULT_DESCRIPTION,
+  path: "/",
+});
 
 function SharedHeroFeatureStar() {
   return (
@@ -23,8 +30,26 @@ function SharedHeroFeatureStar() {
 }
 
 export default function Home() {
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: absoluteUrl("/"),
+      logo: absoluteUrl("/awalim-icon-512.png"),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: absoluteUrl("/"),
+      inLanguage: "ar-EG",
+    },
+  ];
+
   return (
     <main className="bg-white">
+      <JsonLd data={structuredData} />
       <Hero />
       <SharedHeroFeatureStar />
       <Features />

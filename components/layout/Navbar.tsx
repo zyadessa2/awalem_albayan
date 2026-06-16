@@ -31,7 +31,7 @@ export default function Navbar() {
   });
 
   return (
-    <div className="fixed left-0 right-0 top-0 z-50 mt-4 flex justify-center px-4 md:mt-6">
+    <div className="fixed left-0 right-0 top-0 z-50 mt-3 flex justify-center px-3 sm:mt-4 sm:px-4 md:mt-6">
       <motion.nav
         initial={{ width: "95%" }}
         animate={{
@@ -41,7 +41,7 @@ export default function Navbar() {
             : "0 0 0 8px rgba(255,255,255,.08), 0 8px 28px rgba(0,0,0,.24)",
         }}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="relative flex max-w-7xl items-center justify-between rounded-3xl border border-gray-200 bg-white px-5 py-3 text-base md:px-8 md:py-4 md:text-lg"
+        className="relative flex max-w-7xl items-center justify-between rounded-2xl border border-gray-200 bg-white px-4 py-2.5 text-base sm:rounded-3xl sm:px-5 sm:py-3 md:px-8 md:py-4 md:text-lg"
       >
         <Link href="/" aria-label="الرئيسية">
           <Image src="/logo2-display.png" alt="شعار عوالم البيان" width={160} height={50} className="h-auto w-28 object-contain md:w-36" />
@@ -49,7 +49,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="grid h-11 w-11 place-items-center rounded-2xl border border-[#e7e7e7] text-[#141219] md:hidden"
+          className="grid h-10 w-10 place-items-center rounded-2xl border border-[#e7e7e7] text-[#141219] sm:h-11 sm:w-11 md:hidden"
           aria-label="فتح القائمة"
           aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen((value) => !value)}

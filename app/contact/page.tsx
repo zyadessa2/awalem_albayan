@@ -2,6 +2,14 @@ import Image from "next/image";
 import { Almarai } from "next/font/google";
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import ContactForm from "@/components/contact/ContactForm";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "تواصل معنا",
+  description: "تواصل مع عوالم البيان للاستفسار عن الكتب والدورات التعليمية وسلاسل نور البيان للأطفال.",
+  path: "/contact",
+  image: "/contact_photo.png",
+});
 
 const almarai = Almarai({
   subsets: ["arabic"],
