@@ -1,121 +1,37 @@
-import Image from "next/image";
+﻿import BooksSection from "@/components/home/BooksSection";
+import ContactSection from "@/components/home/ContactSection";
+import CoursesSection from "@/components/home/CoursesSection";
+import Features from "@/components/home/Features";
+import Hero from "@/components/home/Hero";
+import JourneySection from "@/components/home/JourneySection";
+
+export const dynamic = "force-dynamic";
+
+function SharedHeroFeatureStar() {
+  return (
+    <div className="pointer-events-none relative z-50 h-0">
+      <svg
+        className="absolute left-10 top-[-38px] hidden h-[81px] w-[81px] rotate-[12.463deg] md:block lg:left-14"
+        viewBox="0 0 80 80"
+        fill="none"
+        aria-hidden
+      >
+        <path d="M48.2859 3.23653e-05L49.4499 8.44957C51.4414 22.9059 59.649 35.7708 71.9196 43.6692L79.0916 48.2857L70.6421 49.4497C56.1857 51.4412 43.3208 59.6488 35.4224 71.9194L30.8059 79.0914L29.6419 70.6419C27.6504 56.1855 19.4428 43.3206 7.1722 35.4222L0.000211775 30.8057L8.44975 29.6417C22.9061 27.6503 35.771 19.4426 43.6694 7.17202L48.2859 3.23653e-05Z" fill="#FDEDD4" />
+      </svg>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center py-12 px-4 bg-white dark:bg-[#0a0a0a] font-sans" dir="rtl">
-      {/* Header & Logo */}
-      <div className="flex flex-col items-center text-center mt-8">
-        <div className="relative w-48 h-32 sm:w-80 sm:h-48 mb-6">
-          <Image
-            className="object-contain"
-            src="/LOGOOOO.png"
-            alt="شعار نور البيان"
-            fill
-            priority
-          />
-        </div>
-        <h2 className="text-zinc-500 dark:text-zinc-400 text-lg sm:text-xl font-medium mt-2">
-          المنصة العالمية لتعليم العربية والقرآن لأبنائك
-        </h2>
-        <p className="text-[#dfb256] text-xs sm:text-sm tracking-widest uppercase mt-2">
-          The Global Platform for Arabic & Quran Learning
-        </p>
-      </div>
-
-      {/* Stats */}
-      <div className="flex flex-row items-center justify-center gap-8 sm:gap-20 my-16 text-[#dfb256]">
-        <div className="flex flex-col items-center">
-          <span className="text-4xl sm:text-5xl font-bold mb-2">+10</span>
-          <span className="text-zinc-400 text-xs sm:text-sm">سنوات خبرة</span>
-          <span className="text-[#dfb256]/70 text-[10px] sm:text-xs uppercase tracking-wider mt-1">Years Experience</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <span className="text-4xl sm:text-5xl font-bold mb-2">37K</span>
-          <span className="text-zinc-400 text-xs sm:text-sm">مشترك</span>
-          <span className="text-[#dfb256]/70 text-[10px] sm:text-xs uppercase tracking-wider mt-1">Subscribers</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <span className="text-4xl sm:text-5xl font-bold mb-2">30+</span>
-          <span className="text-zinc-400 text-xs sm:text-sm">دولة</span>
-          <span className="text-[#dfb256]/70 text-[10px] sm:text-xs uppercase tracking-wider mt-1">Countries</span>
-        </div>
-      </div>
-
-      {/* Launching Soon Badge */}
-      <div className="inline-flex items-center gap-3 px-8 py-3 rounded-full border border-[#dfb256]/30 bg-transparent text-zinc-500 dark:text-zinc-300 text-sm tracking-widest mb-16">
-        <span>قريباً – LAUNCHING SOON</span>
-        <span className="relative flex h-3 w-3">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-        </span>
-      </div>
-
-      {/* Features Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full px-4 mb-24">
-        <div className="flex flex-col items-center text-center p-8 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-[#111] shadow-sm hover:shadow-md transition-shadow">
-          <span className="text-4xl mb-6">🌍</span>
-          <h3 className="text-[#dfb256] font-bold text-lg mb-1">للعجم والجاليات</h3>
-          <p className="text-[#dfb256]/70 text-xs tracking-wider uppercase mb-4">For Non-Arabic Speakers</p>
-          <p className="text-zinc-400 text-sm leading-relaxed">مخصص لأبناء الجاليات العربية والمسلمة حول العالم</p>
-        </div>
-        <div className="flex flex-col items-center text-center p-8 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-[#111] shadow-sm hover:shadow-md transition-shadow">
-          <span className="text-4xl mb-6">📚</span>
-          <h3 className="text-[#dfb256] font-bold text-lg mb-1">منهج متكامل</h3>
-          <p className="text-[#dfb256]/70 text-xs tracking-wider uppercase mb-4">Full Curriculum</p>
-          <p className="text-zinc-400 text-sm leading-relaxed">منهج علمي متدرج لتعليم العربية والقرآن من الصفر</p>
-        </div>
-        <div className="flex flex-col items-center text-center p-8 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-[#111] shadow-sm hover:shadow-md transition-shadow">
-          <span className="text-4xl mb-6">🕌</span>
-          <h3 className="text-[#dfb256] font-bold text-lg mb-1">قرآن وعربية</h3>
-          <p className="text-[#dfb256]/70 text-xs tracking-wider uppercase mb-4">Quran & Arabic</p>
-          <p className="text-zinc-400 text-sm leading-relaxed">تعليم القراءة والتجويد واللغة في منهج واحد</p>
-        </div>
-        <div className="flex flex-col items-center text-center p-8 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-[#111] shadow-sm hover:shadow-md transition-shadow">
-          <span className="text-4xl mb-6">💻</span>
-          <h3 className="text-[#dfb256] font-bold text-lg mb-1">تعليم أونلاين</h3>
-          <p className="text-[#dfb256]/70 text-xs tracking-wider uppercase mb-4">Online Classes</p>
-          <p className="text-zinc-400 text-sm leading-relaxed">حصص مباشرة مع معلمين متخصصين عن بُعد</p>
-        </div>
-      </div>
-
-      {/* Socials & Contact */}
-      <div className="flex flex-col items-center w-full max-w-md px-4">
-        {/* <div className="flex items-center gap-4 mb-6 text-zinc-300 w-full">
-          <hr className="flex-1 border-zinc-200 dark:border-zinc-800" />
-          <span className="text-[10px] uppercase tracking-widest text-[#dfb256]/50">تابعونا - Follow Us</span>
-          <hr className="flex-1 border-zinc-200 dark:border-zinc-800" />
-        </div>
-        
-        <div className="flex gap-4 mb-12">
-          <a href="#" className="flex items-center justify-center w-12 h-12 rounded-full border border-[#dfb256]/30 text-[#dfb256] hover:bg-[#dfb256]/10 transition-colors">
-            🎵
-          </a>
-          <a href="#" className="flex items-center justify-center w-12 h-12 rounded-full border border-[#dfb256]/30 text-[#dfb256] hover:bg-[#dfb256]/10 transition-colors">
-            ▶️
-          </a>
-          <a href="#" className="flex items-center justify-center w-12 h-12 rounded-full border border-[#dfb256]/30 text-[#dfb256] hover:bg-[#dfb256]/10 transition-colors">
-            📸
-          </a>
-          <a href="#" className="flex items-center justify-center w-12 h-12 rounded-full border border-[#dfb256]/30 text-[#dfb256] hover:bg-[#dfb256]/10 font-bold transition-colors">
-            f
-          </a>
-        </div>
-
-        <div className="flex items-center gap-4 mb-6 text-zinc-300 w-full">
-          <hr className="flex-1 border-zinc-200 dark:border-zinc-800" />
-          <span className="text-[10px] uppercase tracking-widest text-[#dfb256]/50">تواصل معنا - Contact Us</span>
-          <hr className="flex-1 border-zinc-200 dark:border-zinc-800" />
-        </div>
-        
-        <a href="#" className="inline-flex items-center gap-3 px-8 py-3 rounded-full border border-emerald-200 bg-white dark:bg-[#111] text-emerald-500 hover:bg-emerald-50 dark:border-emerald-800/50 dark:hover:bg-emerald-900/20 shadow-sm transition-colors mb-8">
-          <span className="text-xl">💬</span>
-          <span className="font-semibold text-sm">WhatsApp | واتساب</span>
-        </a> */}
-        
-        <div className="text-zinc-300 dark:text-zinc-600 text-xs mt-8">
-          © 2026 Noor Al-Bayan - All rights reserved.
-        </div>
-      </div>
-    </div>
+    <main className="bg-white">
+      <Hero />
+      <SharedHeroFeatureStar />
+      <Features />
+      <BooksSection />
+      <JourneySection />
+      <CoursesSection />
+      <ContactSection />
+    </main>
   );
 }
