@@ -1,21 +1,38 @@
 import type { NextConfig } from "next";
 
-const s3Host =
-  process.env.AWS_S3_BUCKET_NAME && process.env.AWS_REGION
-    ? `${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com`
-    : undefined;
+function getHostingerImagePattern() {
+  const publicBaseUrl = process.env.HOSTINGER_UPLOAD_PUBLIC_BASE_URL;
+
+  if (!publicBaseUrl) {
+    return null;
+  }
+
+  try {
+    const url = new URL(publicBaseUrl);
+    const protocol = url.protocol.replace(":", "");
+
+    if (protocol !== "http" && protocol !== "https") {
+      return null;
+    }
+
+    const pathname = `${url.pathname.replace(/\/+$/, "")}/**`;
+
+    return {
+      protocol: protocol as "http" | "https",
+      hostname: url.hostname,
+      port: url.port,
+      pathname,
+    };
+  } catch {
+    return null;
+  }
+}
+
+const hostingerImagePattern = getHostingerImagePattern();
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: s3Host
-      ? [
-          {
-            protocol: "https",
-            hostname: s3Host,
-            pathname: "/uploads/**",
-          },
-        ]
-      : [],
+    remotePatterns: hostingerImagePattern ? [hostingerImagePattern] : [],
   },
 };
 

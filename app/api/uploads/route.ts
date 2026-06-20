@@ -2,7 +2,10 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { requireAdminSession } from "@/lib/auth/session";
 import { fail, handleRouteError, ok } from "@/lib/utils/api";
-import { canUseS3Uploads, uploadFileToS3 } from "@/lib/uploads/s3";
+import {
+  canUseHostingerUploads,
+  uploadFileToHostinger,
+} from "@/lib/uploads/hostinger";
 
 export const runtime = "nodejs";
 
@@ -49,14 +52,14 @@ export async function POST(request: Request) {
     const fileName = safeFileName(file.name);
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    if (canUseS3Uploads()) {
-      const url = await uploadFileToS3({
+    if (canUseHostingerUploads()) {
+      const url = await uploadFileToHostinger({
         buffer,
         contentType: file.type,
         key: createUploadKey(fileName),
       });
 
-      return ok({ url, storage: "s3" }, 201);
+      return ok({ url, storage: "hostinger" }, 201);
     }
 
     const uploadDir = path.join(process.cwd(), "public", "uploads");
