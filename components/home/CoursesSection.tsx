@@ -98,16 +98,16 @@ export default async function CoursesSection() {
       <CoursesDecorations />
 
       <div className="mx-auto max-w-[1440px]">
-        <div className="mb-12 flex flex-col-reverse items-center justify-between gap-8 text-center [direction:ltr] sm:items-start sm:text-right lg:flex-row lg:items-start">
+        <div data-reveal="left" className="mb-12 flex flex-col-reverse items-center justify-between gap-8 text-center [direction:ltr] sm:items-start sm:text-right lg:flex-row lg:items-start">
           <CoursesLink />
 
           <div className="w-full text-center [direction:rtl] sm:text-right lg:w-[789px]">
             <h2 className="text-4xl font-bold leading-normal text-[#141219] md:text-5xl">
-              أهم الدورات <span className="text-[#c2187a]">التعليمية</span>
+             الدورات والكورسات <span className="text-[#c2187a]">التعليمية</span>
             </h2>
-            <p className="mt-3 max-w-[789px] text-lg font-bold leading-[34px] text-[#525252] md:text-2xl">
-              سلاسل تعليمية تسهم في بناء مهارات الطفل بثقة ومتعة.
-            </p>
+            {/* <p className="mt-3 max-w-[789px] text-lg font-bold leading-[34px] text-[#525252] md:text-2xl">
+              دورات تعليمية تسهم في بناء مهارات الطفل بثقة ومتعة.
+            </p> */}
             <div className="flex justify-center sm:justify-start">
               <OrangeStroke />
             </div>

@@ -42,7 +42,7 @@ function PageHero() {
         <div className="absolute bottom-[8%] right-[15%] h-8 w-8 rounded-full bg-[#ffd700]" />
       </div>
 
-      <div className="relative z-10 flex min-h-[324px] items-center justify-center px-4 text-center">
+      <div data-reveal="up" className="relative z-10 flex min-h-[324px] items-center justify-center px-4 text-center">
         <h1 className="font-qalbi text-[48px] font-normal leading-normal sm:text-[72px] lg:text-[96px]">
           <span className="text-[#6fb23e]">الدورات</span>{" "}
           <span className="text-[#c2187a]">التعليمية</span>
@@ -65,7 +65,7 @@ function OrangeStroke() {
 
 function SectionTitle() {
   return (
-    <div className="relative z-10 mx-auto mb-20 max-w-7xl text-center lg:mb-24 lg:text-right">
+    <div data-reveal="right" className="relative z-10 mx-auto mb-20 max-w-7xl text-center lg:mb-24 lg:text-right">
       <h2 className="text-4xl font-extrabold leading-normal text-[#141219] md:text-5xl">
         أهم الدورات <span className="text-[#c2187a]">التعليمية</span>
       </h2>

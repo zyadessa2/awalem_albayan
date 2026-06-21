@@ -3,6 +3,7 @@ import { Cairo } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/home/Footer";
 import InstallPrompt from "@/components/pwa/InstallPrompt";
+import MotionExperience from "@/components/motion/MotionExperience";
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SEO_KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
@@ -79,7 +80,9 @@ export default function RootLayout({
     <html lang="ar" dir="rtl" className={`${cairo.variable} h-full scroll-smooth antialiased`}>
       <body className="flex min-h-full flex-col bg-white font-sans text-[#171717]">
         <Navbar />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1">
+          <MotionExperience>{children}</MotionExperience>
+        </div>
         <Footer />
         <InstallPrompt />
       </body>

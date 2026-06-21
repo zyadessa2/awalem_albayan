@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Almarai } from "next/font/google";
+import { FaArrowLeft, FaBookOpen, FaCheckCircle } from "react-icons/fa";
 import ProductCard from "@/components/home/ProductCard";
 import {
   getPublishedBookSeries,
@@ -52,15 +53,75 @@ function OrangeStroke({ className = "" }: { className?: string }) {
 
 function PageHero() {
   return (
-    <section className="relative mt-[102px] min-h-[324px] overflow-hidden bg-[#edf7e8] sm:mt-[116px]">
-      <div className="absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[#edf7e8]" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_55%,rgba(111,178,62,0.24),transparent_34%),radial-gradient(circle_at_82%_45%,rgba(111,178,62,0.18),transparent_32%),linear-gradient(90deg,rgba(111,178,62,0.16),rgba(111,178,62,0.08))]" />
+    <section className="relative mt-[88px] overflow-hidden bg-[#f3faee] px-4 pb-12 pt-14 sm:mt-[104px] sm:px-6 lg:min-h-[590px] lg:pb-14 lg:pt-16">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="absolute -right-32 -top-40 size-[480px] rounded-full bg-[#6fb23e]/15 blur-3xl" />
+        <div className="absolute -bottom-52 left-[10%] size-[480px] rounded-full bg-[#f4a62a]/12 blur-3xl" />
+        <div className="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_1px_1px,rgba(111,178,62,0.18)_1.2px,transparent_0)] [background-size:28px_28px]" />
+        <span className="absolute left-[5%] top-[14%] -rotate-12 text-7xl font-light text-[#6fb23e]/15">أ</span>
+        <span className="absolute right-[45%] top-[10%] rotate-12 text-6xl font-light text-[#c2187a]/10">ب</span>
       </div>
-      <div className="relative z-10 flex min-h-[324px] items-center justify-center px-4 text-center">
-        <h1 className="font-qalbi text-[58px] font-normal leading-normal sm:text-[76px] lg:text-[96px]">
-          <span className="text-[#6fb23e]">سلاسل</span>{" "}
-          <span className="text-[#c2187a]">الكتب</span>
-        </h1>
+
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1fr_0.95fr] lg:gap-16">
+        <div data-reveal="right" className="text-center lg:text-right">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#cfe4c0] bg-white/85 px-5 py-2 text-sm font-extrabold text-[#5b9f2d] shadow-sm">
+            <FaBookOpen aria-hidden />
+            مكتبة عوالم البيان
+          </span>
+
+          <h1 className="mt-5 text-[44px] font-extrabold leading-[1.35] text-[#172016] sm:text-[58px] lg:text-[68px]">
+            كتب تصنع
+            <span className="relative mx-2 inline-block text-[#c2187a]">
+              بداية قوية
+              <span className="absolute -bottom-1 left-0 h-2 w-full -rotate-1 rounded-full bg-[#f4a62a]/45" aria-hidden />
+            </span>
+            <span className="block text-[#6fb23e]">لمستقبل طفلك</span>
+          </h1>
+
+          <p className="mx-auto mt-5 max-w-2xl text-base font-bold leading-8 text-[#535c4f] sm:text-lg sm:leading-9 lg:mx-0">
+            سلاسل وكتب تعليمية متدرجة تجمع بين الفهم والمتعة، وتساعد الطفل على بناء مهارات القراءة واللغة بثقة منذ خطواته الأولى.
+          </p>
+
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
+            <Link href="#book-series" className="flex h-14 w-full max-w-[230px] items-center justify-center gap-3 rounded-2xl bg-[#6fb23e] text-base font-extrabold text-white shadow-[0_12px_26px_rgba(111,178,62,0.26)] transition hover:-translate-y-0.5 hover:bg-[#61a234]">
+              تصفح سلاسلنا
+              <FaArrowLeft className="text-sm" aria-hidden />
+            </Link>
+            <Link href="/contact" className="flex h-14 w-full max-w-[230px] items-center justify-center rounded-2xl border-2 border-[#6fb23e] bg-white/80 text-base font-extrabold text-[#5b9f2d] transition hover:bg-white">
+              تواصل معنا
+            </Link>
+          </div>
+
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-sm font-extrabold text-[#4b5746] lg:justify-start">
+            {["محتوى موثوق", "تعلم متدرج", "أسلوب ممتع"].map((item) => (
+              <span key={item} className="inline-flex items-center gap-2">
+                <FaCheckCircle className="text-[#6fb23e]" aria-hidden />
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div data-reveal="left" data-reveal-delay="0.08" className="relative mx-auto h-[360px] w-full max-w-[560px] sm:h-[440px] lg:h-[470px]">
+          <div className="absolute inset-x-[8%] bottom-[7%] top-[5%] rotate-3 rounded-[42%_58%_48%_52%/48%_42%_58%_52%] bg-[#dceecf]" aria-hidden />
+          <div className="absolute inset-x-[16%] bottom-[3%] h-16 rounded-full bg-[#315f1c]/15 blur-2xl" aria-hidden />
+
+          <div className="absolute bottom-[4%] right-[2%] z-20 h-[72%] w-[58%]">
+            <Image src="/book-product.png" alt="كتب نور البيان التعليمية" fill priority sizes="(max-width: 1024px) 52vw, 330px" className="object-contain object-bottom drop-shadow-[0_24px_28px_rgba(36,69,20,0.2)]" />
+          </div>
+          <div className="absolute bottom-0 left-0 z-10 h-[88%] w-[56%]">
+            <Image src="/girl_books.png" alt="طفلة تستمتع بكتب عوالم البيان" fill priority sizes="(max-width: 1024px) 52vw, 315px" className="object-contain object-bottom" />
+          </div>
+
+          <div className="absolute left-[3%] top-[8%] z-30 rounded-2xl border border-white/80 bg-white/90 px-4 py-3 text-right shadow-[0_12px_28px_rgba(49,75,33,0.14)] backdrop-blur-sm">
+            <p className="text-xl font-black text-[#f4a62a]">+1,000,000</p>
+            <p className="mt-0.5 text-xs font-extrabold text-[#4e584a]">نسخة من نور البيان</p>
+          </div>
+
+          <div className="absolute right-[7%] top-[3%] z-20 grid size-14 rotate-12 place-items-center rounded-2xl bg-[#c2187a] text-2xl text-white shadow-lg" aria-hidden>
+            <FaBookOpen />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -68,7 +129,7 @@ function PageHero() {
 
 function SectionTitle({ black, pink }: { black: string; pink: string }) {
   return (
-    <div className="mb-12 flex flex-col items-center text-center">
+    <div data-reveal="up" className="mb-12 flex flex-col items-center text-center">
       <h2 className="text-4xl font-extrabold leading-normal text-[#141219] md:text-5xl">
         {black} <span className="text-[#c2187a]">{pink}</span>
       </h2>
@@ -91,7 +152,7 @@ function BookCountIcon({ className = "h-[19px] w-[19px]" }: { className?: string
 
 function SeriesCard({ item }: { item: SeriesCardItem }) {
   return (
-    <article className="relative mx-auto grid min-h-[330px] w-full max-w-[624px] gap-6 rounded-[42px] bg-white p-8 text-center shadow-[2px_3px_40px_rgba(0,0,0,0.16)] sm:grid-cols-[188px_minmax(0,1fr)] sm:items-center sm:text-right sm:[direction:ltr]">
+    <article data-reveal="up" className="relative mx-auto grid min-h-[330px] w-full max-w-[624px] gap-6 rounded-[42px] bg-white p-8 text-center shadow-[2px_3px_40px_rgba(0,0,0,0.16)] sm:grid-cols-[188px_minmax(0,1fr)] sm:items-center sm:text-right sm:[direction:ltr]">
       <div className="relative mx-auto h-[170px] w-[170px] rounded-[20px] bg-[#fef6ea] sm:h-[196px] sm:w-[178px]">
         <Image src={item.imageSrc} alt={item.title} fill sizes="190px" className="scale-110 object-contain object-center" />
       </div>
@@ -169,7 +230,7 @@ export default async function BooksPage() {
     <main className={`min-h-screen overflow-x-hidden bg-white ${almarai.className}`}>
       <PageHero />
 
-      <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 lg:py-20">
+      <section id="book-series" className="relative scroll-mt-28 overflow-hidden bg-white px-4 py-16 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <SectionTitle black="سلاسل" pink="الكتب" />
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 pt-6 xl:grid-cols-2">

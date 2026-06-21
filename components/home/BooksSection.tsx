@@ -97,7 +97,7 @@ export default async function BooksSection() {
       </div>
 
       <div className="mx-auto max-w-7xl">
-        <div className="mb-36 flex flex-col-reverse items-center justify-between gap-8 text-center sm:mb-40 sm:items-start sm:text-right lg:mb-44 lg:flex-row-reverse lg:items-start">
+        <div data-reveal="right" className="mb-36 flex flex-col-reverse items-center justify-between gap-8 text-center sm:mb-40 sm:items-start sm:text-right lg:mb-44 lg:flex-row-reverse lg:items-start">
           <BooksLink />
 
           <div className="w-full text-center sm:text-right lg:w-[789px] lg:text-right">

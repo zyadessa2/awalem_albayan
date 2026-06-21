@@ -1,9 +1,12 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { FaPaperPlane } from "react-icons/fa";
 
 const inputClass =
-  "h-[50px] w-full rounded-lg border border-[#e4e4e7] bg-[#f4f4f5] px-5 text-right text-sm font-normal text-[#525252] outline-none transition placeholder:text-[#a1a1aa] focus:border-[#6fb23e] focus:bg-white";
+  "h-14 w-full rounded-2xl border border-[#dfe8d9] bg-[#f8faf6] px-5 text-right text-sm font-bold text-[#394235] outline-none transition placeholder:font-normal placeholder:text-[#9aa394] hover:border-[#c8d9bc] focus:border-[#6fb23e] focus:bg-white focus:shadow-[0_0_0_4px_rgba(111,178,62,0.1)]";
+
+const labelClass = "mb-2 block text-sm font-extrabold text-[#353b32]";
 
 export default function ContactForm({ className = "" }: { className?: string }) {
   const [isSending, setIsSending] = useState(false);
@@ -48,22 +51,54 @@ export default function ContactForm({ className = "" }: { className?: string }) 
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`flex w-full flex-col gap-4 rounded-[20px] bg-white p-5 shadow-[0_18px_48px_rgba(0,0,0,0.18)] sm:p-8 ${className}`}>
-      <input name="name" className={inputClass} type="text" placeholder="أدخل اسمك بالكامل" required minLength={2} />
-      <input name="phone" className={inputClass} type="tel" placeholder="رقم الهاتف" required minLength={5} />
-      <input name="email" className={inputClass} type="email" placeholder="بريدك الإلكتروني" required />
-      <textarea
-        name="message"
-        className="h-[150px] w-full resize-none rounded-lg border border-[#e4e4e7] bg-[#f4f4f5] px-5 py-4 text-right text-sm font-normal text-[#525252] outline-none transition placeholder:text-[#a1a1aa] focus:border-[#6fb23e] focus:bg-white"
-        placeholder="الرسالة..."
-        required
-        minLength={5}
-      />
-      <button type="submit" disabled={isSending} className="mt-1 flex h-[50px] w-full items-center justify-center rounded-xl bg-[#6fb23e] text-base font-extrabold text-white transition hover:bg-[#61a234] disabled:cursor-not-allowed disabled:opacity-60">
-        {isSending ? "جاري الإرسال..." : "تواصل معنا"}
+    <form data-reveal="right" onSubmit={handleSubmit} className={`flex w-full flex-col rounded-[30px] bg-white p-5 sm:p-8 lg:p-10 ${className}`}>
+      <div className="mb-7">
+        <p className="text-sm font-extrabold text-[#6fb23e]">أرسل رسالتك</p>
+        <h2 className="mt-2 text-3xl font-extrabold leading-normal text-[#171a16] sm:text-4xl">
+          كيف يمكننا <span className="text-[#c2187a]">مساعدتك؟</span>
+        </h2>
+        <p className="mt-2 text-sm font-bold leading-7 text-[#70766c]">املأ البيانات التالية وسنتواصل معك في أقرب وقت ممكن.</p>
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2">
+        <label>
+          <span className={labelClass}>الاسم بالكامل</span>
+          <input name="name" className={inputClass} type="text" placeholder="أدخل اسمك بالكامل" autoComplete="name" required minLength={2} />
+        </label>
+        <label>
+          <span className={labelClass}>رقم الهاتف</span>
+          <input name="phone" className={inputClass} type="tel" placeholder="رقم الهاتف" autoComplete="tel" dir="rtl" required minLength={5} />
+        </label>
+      </div>
+
+      <label className="mt-5">
+        <span className={labelClass}>البريد الإلكتروني</span>
+        <input name="email" className={inputClass} type="email" placeholder="بريدك الإلكتروني" autoComplete="email" required />
+      </label>
+
+      <label className="mt-5">
+        <span className={labelClass}>رسالتك</span>
+        <textarea
+          name="message"
+          className="h-[165px] w-full resize-none rounded-2xl border border-[#dfe8d9] bg-[#f8faf6] px-5 py-4 text-right text-sm font-bold text-[#394235] outline-none transition placeholder:font-normal placeholder:text-[#9aa394] hover:border-[#c8d9bc] focus:border-[#6fb23e] focus:bg-white focus:shadow-[0_0_0_4px_rgba(111,178,62,0.1)]"
+          placeholder="اكتب رسالتك أو استفسارك هنا..."
+          required
+          minLength={5}
+        />
+      </label>
+
+      <button type="submit" disabled={isSending} className="mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#6fb23e] text-base font-extrabold text-white shadow-[0_10px_24px_rgba(111,178,62,0.24)] transition hover:-translate-y-0.5 hover:bg-[#61a234] hover:shadow-[0_14px_28px_rgba(111,178,62,0.3)] disabled:cursor-not-allowed disabled:opacity-60">
+        {isSending ? (
+          "جاري الإرسال..."
+        ) : (
+          <>
+            <FaPaperPlane className="-rotate-45 text-sm" aria-hidden />
+            <span>إرسال الرسالة</span>
+          </>
+        )}
       </button>
       {message ? (
-        <p className={`rounded-lg px-4 py-3 text-center text-sm font-bold ${isSuccess ? "bg-[#eef8e8] text-[#44751f]" : "bg-[#fdeef5] text-[#a91568]"}`}>
+        <p aria-live="polite" className={`mt-4 rounded-xl px-4 py-3 text-center text-sm font-bold ${isSuccess ? "bg-[#eef8e8] text-[#44751f]" : "bg-[#fdeef5] text-[#a91568]"}`}>
           {message}
         </p>
       ) : null}

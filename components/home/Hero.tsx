@@ -1,11 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Almarai } from "next/font/google";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaChevronLeft, FaWhatsapp } from "react-icons/fa";
 
 const almarai = Almarai({
   subsets: ["arabic"],
   weight: ["400", "700", "800"],
 });
+
+const heroButtonClass =
+  "relative flex h-[62px] w-[min(100%,330px)] items-center justify-center gap-2 rounded-3xl px-5 py-4 text-xl font-bold leading-normal transition hover:-translate-y-px lg:h-[72px] lg:w-[374px] lg:text-2xl";
 
 function HeroArrow() {
   return (
@@ -61,13 +65,13 @@ export default function Hero() {
       />
 
       <div className="relative z-[5] mx-auto grid min-h-[470px] w-[min(100%,1328px)] grid-cols-1 items-center gap-5 px-[18px] pb-12 pt-8 [direction:ltr] lg:min-h-[552px] lg:grid-cols-[minmax(0,1fr)_minmax(460px,625px)] lg:gap-[46px] lg:px-6 lg:pb-11 lg:pt-[34px]">
-        <div className="w-[min(100%,625px)] justify-self-center text-center [direction:rtl] lg:col-start-2 lg:justify-self-end lg:text-right">
-          <div className="relative mx-auto mb-2.5 h-[99.4px] w-[min(100%,320px)] max-w-full shrink-0 overflow-hidden [aspect-ratio:177/55] md:h-[127.708px] md:w-[411px] lg:mx-0">
+        <div data-reveal="right" className="w-[min(100%,625px)] justify-self-center text-center [direction:rtl] lg:col-start-2 lg:justify-self-end lg:text-right">
+          <div className="relative mx-auto mb-2.5 h-[112px] w-[min(100%,360px)] max-w-full shrink-0 overflow-hidden [aspect-ratio:177/55] md:h-[146px] md:w-[470px] lg:mx-0">
             <Image
-              src="/logo2-display.png"
+              src="/logo2-display-hero.png"
               alt="عوالم البيان"
-              width={411}
-              height={128}
+              width={470}
+              height={146}
               className="h-full w-full object-contain object-right max-lg:object-center"
               fetchPriority="high"
             />
@@ -92,19 +96,30 @@ export default function Hero() {
             />
           </div>
 
-          <div className="mt-[52px] flex items-center justify-center gap-[22px] [direction:ltr] lg:mt-[72px] lg:justify-start">
+          <div className="mt-[52px] flex items-center justify-center gap-[22px] [direction:ltr] lg:mt-[60px] lg:justify-start">
             <HeroArrow />
-            <a
-              href="https://wa.me/966501234567"
-              className={`flex h-[62px] w-[min(100%,310px)] items-center justify-center gap-2 rounded-3xl bg-[#6fb23e] px-0 py-4 text-xl font-bold leading-normal text-white transition hover:-translate-y-px hover:bg-[#61a234] lg:h-[72px] lg:w-[374px] lg:text-2xl ${almarai.className}`}
-            >
-              <FaWhatsapp aria-hidden />
-              <span>تواصل معنا</span>
-            </a>
+            <div className={`flex w-[min(100%,330px)] flex-col items-center gap-3 lg:w-[374px] ${almarai.className}`}>
+              <Link
+                href="/about"
+                className={`${heroButtonClass} bg-[#6fb23e] text-white shadow-[0_8px_22px_rgba(111,178,62,0.24)] hover:bg-[#61a234] hover:shadow-[0_10px_26px_rgba(111,178,62,0.3)]`}
+              >
+                <span>اكتشف عوالم البيان</span>
+                <span className="absolute left-3 grid size-9 place-items-center rounded-full bg-white text-sm text-[#6fb23e] shadow-sm lg:left-4 lg:size-10" aria-hidden>
+                  <FaChevronLeft />
+                </span>
+              </Link>
+              <a
+                href="https://wa.me/+201033768477"
+                className={`${heroButtonClass} border-2 border-[#6fb23e] bg-white/90 text-[#5b9f2d] shadow-[0_8px_22px_rgba(111,178,62,0.14)] hover:bg-[#f3faee]`}
+              >
+                <FaWhatsapp aria-hidden />
+                <span>تواصل معنا</span>
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="relative hidden min-h-[360px] items-center justify-center md:min-h-[460px] lg:col-start-1 lg:row-start-1 lg:flex lg:min-h-[545px]">
+        <div data-reveal="left" data-reveal-delay="0.08" className="relative hidden min-h-[360px] items-center justify-center md:min-h-[460px] lg:col-start-1 lg:row-start-1 lg:flex lg:min-h-[545px]">
           <BookIcon className="pointer-events-none absolute left-[5%] top-[8%] z-[1] h-[66.129px] w-[54.972px] -rotate-[36.337deg] max-sm:scale-75" />
           <BookIcon className="pointer-events-none absolute right-[2%] top-[34%] z-[1] h-[46.889px] w-[56.98px] rotate-[14deg] max-sm:scale-75" />
           <BookIcon className="pointer-events-none absolute bottom-[18%] left-[1%] z-[1] h-[46.889px] w-[56.98px] -rotate-12 max-sm:scale-75" />

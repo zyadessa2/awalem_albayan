@@ -1,7 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Almarai } from "next/font/google";
-import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaFacebookF,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaTiktok,
+  FaWhatsapp,
+  FaYoutube,
+} from "react-icons/fa";
 
 const almarai = Almarai({
   subsets: ["arabic"],
@@ -14,6 +22,33 @@ const links = [
   ["الدورات التعليمية", "/courses"],
   ["الكتب", "/books"],
   ["تواصل معنا", "/contact"],
+];
+
+const socialLinks = [
+  {
+    label: "واتساب",
+    href: "https://wa.me/966501234567",
+    icon: FaWhatsapp,
+    color: "text-[#25D366] hover:border-[#25D366] hover:bg-[#25D366]",
+  },
+  {
+    label: "فيسبوك",
+    href: "https://www.facebook.com/profile.php?id=61576678812015&locale=ar_AR",
+    icon: FaFacebookF,
+    color: "text-[#1877F2] hover:border-[#1877F2] hover:bg-[#1877F2]",
+  },
+  {
+    label: "يوتيوب",
+    href: "https://www.youtube.com/@Nooralbayaneg",
+    icon: FaYoutube,
+    color: "text-[#FF0000] hover:border-[#FF0000] hover:bg-[#FF0000]",
+  },
+  {
+    label: "تيك توك",
+    href: "https://www.tiktok.com/",
+    icon: FaTiktok,
+    color: "text-[#161616] hover:border-[#161616] hover:bg-[#161616]",
+  },
 ];
 
 function FooterBackground() {
@@ -48,16 +83,35 @@ export default function Footer() {
         <div className="mx-auto mt-7 flex max-w-4xl flex-wrap items-center justify-center gap-x-16 gap-y-4 text-sm font-bold text-[#6b7280]">
           <span className="inline-flex items-center gap-2">
             <FaMapMarkerAlt className="text-[#f4a62a]" aria-hidden />
-            الرياض، المملكة العربية السعودية
+              10th of ramadan , alsharqia , egypt
           </span>
           <span className="inline-flex items-center gap-2" dir="ltr">
             <FaPhoneAlt className="text-[#f4a62a]" aria-hidden />
-            +966 50 123 4567
+            +201033768477
           </span>
           <span className="inline-flex items-center gap-2" dir="ltr">
             <FaEnvelope className="text-[#f4a62a]" aria-hidden />
-            info@arabiclearn.com
+            awalem@arabiclearn.com
           </span>
+        </div>
+
+        <div className="mt-7" aria-label="حساباتنا على مواقع التواصل الاجتماعي">
+          <p className="text-sm font-extrabold text-[#4f5f49]">تابعنا على منصات التواصل</p>
+          <div className="mt-4 flex items-center justify-center gap-3" dir="ltr">
+            {socialLinks.map(({ label, href, icon: Icon, color }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`تابعنا على ${label}`}
+                title={label}
+                className={`group inline-flex size-11 items-center justify-center rounded-full border border-[#d7e8cc] bg-white/85 text-lg shadow-[0_5px_18px_rgba(67,104,42,0.1)] transition duration-300 hover:-translate-y-1 hover:text-white hover:shadow-[0_8px_22px_rgba(67,104,42,0.18)] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#6fb23e] ${color}`}
+              >
+                <Icon className="transition-transform duration-300 group-hover:scale-110" aria-hidden />
+              </a>
+            ))}
+          </div>
         </div>
 
         <div className="mt-9 border-t border-[#d7e8cc] pt-6">

@@ -54,7 +54,7 @@ export default function Home() {
       <SharedHeroFeatureStar />
       <Features />
       <BooksSection />
-      <JourneySection />
+      {/* <JourneySection /> */}
       <CoursesSection />
       <ContactSection />
     </main>

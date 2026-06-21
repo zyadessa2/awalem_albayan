@@ -37,7 +37,7 @@ export default function ContactSection() {
       <div className="relative z-10 mx-auto grid max-w-[1220px] grid-cols-1 items-center gap-6 [direction:ltr] lg:grid-cols-[minmax(360px,514px)_minmax(0,1fr)] lg:gap-0">
         <ContactForm className="relative z-20 order-2 mx-auto max-w-[514px] rounded-[18px] lg:order-1 lg:mr-[-34px] lg:shadow-[0_18px_48px_rgba(0,0,0,0.22)]" />
 
-        <div className="relative order-1 min-h-[306px] overflow-hidden rounded-3xl bg-[#e9efd7] lg:order-2 lg:min-h-[352px] lg:rounded-[0_36px_36px_0]">
+        <div data-reveal="left" data-reveal-delay="0.08" className="relative order-1 min-h-[306px] overflow-hidden rounded-3xl bg-[#e9efd7] lg:order-2 lg:min-h-[352px] lg:rounded-[0_36px_36px_0]">
           <Image
             src="/contact_photo.png"
             alt=""

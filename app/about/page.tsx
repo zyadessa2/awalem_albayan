@@ -1,6 +1,21 @@
 import Image from "next/image";
 import { Almarai } from "next/font/google";
-import { FaBookOpen, FaBrain, FaSeedling } from "react-icons/fa";
+import {
+  FaAward,
+  FaBookOpen,
+  FaBrain,
+  FaCalculator,
+  FaChartLine,
+  FaCheckCircle,
+  FaCrown,
+  FaGlobeAfrica,
+  FaLanguage,
+  FaLaptop,
+  FaPencilAlt,
+  FaPuzzlePiece,
+  FaSchool,
+  FaSeedling,
+} from "react-icons/fa";
 import type { IconType } from "react-icons";
 import type { ReactNode } from "react";
 import { createPageMetadata } from "@/lib/seo";
@@ -18,28 +33,72 @@ const almarai = Almarai({
 });
 
 function PageHero() {
+  const features = [
+    { title: "تعلم متدرج", text: "بناء على الفهم", icon: FaChartLine, color: "text-[#6fb23e]", background: "bg-[#edf7e8]" },
+    { title: "أنشطة مبتكرة", text: "ومهارات عملية", icon: FaPencilAlt, color: "text-[#c2187a]", background: "bg-[#fde8f3]" },
+    { title: "تأسيس لغوي", text: "وقرآني قوي", icon: FaSeedling, color: "text-[#6fb23e]", background: "bg-[#edf7e8]" },
+    { title: "تنمية التفكير", text: "والفهم", icon: FaBrain, color: "text-[#c2187a]", background: "bg-[#fde8f3]" },
+    { title: "مناهج تعليمية", text: "متكاملة", icon: FaBookOpen, color: "text-[#6fb23e]", background: "bg-[#edf7e8]" },
+  ];
+
   return (
-    <section className="relative mt-[102px] min-h-[324px] overflow-hidden bg-[#edf7e8] sm:mt-[116px]">
-      <div className="absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-[#edf7e8]" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_55%,rgba(111,178,62,0.24),transparent_34%),radial-gradient(circle_at_82%_45%,rgba(111,178,62,0.18),transparent_32%),linear-gradient(90deg,rgba(111,178,62,0.16),rgba(111,178,62,0.08))]" />
-        <div className="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_1px_1px,rgba(111,178,62,0.22)_1.2px,transparent_0)] [background-size:24px_24px]" />
-        <div className="absolute inset-x-0 top-0 h-14 bg-[radial-gradient(22px_14px_at_10px_4px,#fff_98%,transparent_100%),radial-gradient(36px_22px_at_58px_8px,#fff_98%,transparent_100%),radial-gradient(24px_18px_at_106px_0px,#fff_98%,transparent_100%)] bg-repeat-x [background-size:132px_42px]" />
-        <div className="absolute inset-x-0 bottom-0 h-14 rotate-180 bg-[radial-gradient(22px_14px_at_10px_4px,#fff_98%,transparent_100%),radial-gradient(36px_22px_at_58px_8px,#fff_98%,transparent_100%),radial-gradient(24px_18px_at_106px_0px,#fff_98%,transparent_100%)] bg-repeat-x [background-size:132px_42px]" />
+    <section className="relative mt-[88px] overflow-hidden bg-[#fdfefd] px-4 pb-12 pt-10 sm:mt-[104px] sm:px-6 sm:pb-16 lg:pb-12 lg:pt-12">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden text-[#dfe4dc]" aria-hidden>
+        <span className="absolute left-[3%] top-[11%] -rotate-12 text-7xl font-light opacity-45">☆</span>
+        <span className="absolute right-[3%] top-[9%] rotate-12 text-7xl font-light opacity-35">A</span>
+        <span className="absolute left-[7%] top-[45%] rotate-6 text-5xl font-light opacity-30">٢</span>
+        <span className="absolute right-[8%] top-[42%] -rotate-12 text-6xl font-light opacity-25">أ</span>
+        <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_1px_1px,rgba(111,178,62,0.13)_1px,transparent_0)] [background-size:30px_30px]" />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 hidden sm:block" aria-hidden>
-        <div className="absolute left-[18%] top-[42%] text-5xl font-bold text-white/80">٢</div>
-        <div className="absolute right-[20%] top-[30%] text-5xl font-bold text-white/80">ن</div>
-        <div className="absolute right-[29%] bottom-[19%] text-5xl font-bold text-white/80">١</div>
-        <div className="absolute left-[18%] bottom-[19%] h-8 w-8 rotate-45 bg-[#ffd700]" />
-        <div className="absolute bottom-[8%] right-[15%] h-8 w-8 rounded-full bg-[#ffd700]" />
-      </div>
+      <div data-reveal="up" className="relative z-10 mx-auto flex max-w-7xl flex-col items-center text-center">
+        <h1 className="sr-only">عوالم البيان ناشرون</h1>
+        <Image
+          src="/logo2-display-hero.png"
+          alt="عوالم البيان ناشرون"
+          width={2048}
+          height={741}
+          priority
+          className="h-auto w-[min(92vw,760px)] object-contain"
+        />
 
-      <div className="relative z-10 flex min-h-[324px] items-center justify-center px-4 text-center">
-        <h1 className="font-qalbi text-[58px] font-normal leading-normal sm:text-[76px] lg:text-[96px]">
-          <span className="text-[#6fb23e]">من</span>{" "}
-          <span className="text-[#c2187a]">نحن؟</span>
-        </h1>
+        <p className="mt-1 font-qalbi text-[30px] font-normal leading-normal sm:text-[38px] lg:text-[44px]">
+          <span className="text-[#76c596]">هنا تنبض </span>
+          <span className="text-[#f4a62a]">الحروف</span>
+          <span className="text-[#76c596]">، و </span>
+          <span className="text-[#f4a62a]">تولد</span>
+          <span className="text-[#76c596]"> المعرفة</span>
+        </p>
+
+        <div className="relative mt-7 flex w-full max-w-[1050px] items-center justify-center sm:mt-9">
+          <svg className="hidden h-[90px] w-[135px] shrink-0 text-[#6fb23e] opacity-80 md:block" viewBox="0 0 140 90" fill="none" aria-hidden>
+            <path d="M132 10C72 15 40 31 22 53C13 64 14 76 26 80" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="132" cy="10" r="5" fill="currentColor" />
+          </svg>
+          <p className="mx-4 text-xl font-bold leading-9 text-[#272b26] sm:text-[28px] sm:leading-[1.7] lg:text-[32px]">
+            منظومة تعليمية <span className="text-[#c2187a]">متكاملة</span> لبناء مهارات الطفل
+          </p>
+          <svg className="hidden h-[90px] w-[135px] shrink-0 -scale-x-100 text-[#6fb23e] opacity-80 md:block" viewBox="0 0 140 90" fill="none" aria-hidden>
+            <path d="M132 10C72 15 40 31 22 53C13 64 14 76 26 80" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="132" cy="10" r="5" fill="currentColor" />
+          </svg>
+          <span className="absolute -bottom-2 h-1.5 w-32 rounded-full bg-[#f4a62a]/65" aria-hidden />
+        </div>
+
+        <div className="mt-12 grid w-full max-w-5xl grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 lg:mt-14 lg:grid-cols-5 lg:gap-0">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+            return (
+              <div key={feature.title} className={`relative flex flex-col items-center px-3 ${index > 0 ? "lg:border-r lg:border-[#d8ddd4]" : ""}`}>
+                <span className={`grid size-14 place-items-center rounded-2xl text-2xl ${feature.background} ${feature.color}`}>
+                  <Icon aria-hidden />
+                </span>
+                <h2 className={`mt-3 text-sm font-extrabold sm:text-base ${feature.color}`}>{feature.title}</h2>
+                <p className="mt-1 text-xs font-bold text-[#373b35] sm:text-sm">{feature.text}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -136,7 +195,7 @@ const cards = [
 
 function AboutCard({ card }: { card: (typeof cards)[number] }) {
   return (
-    <article className="relative mx-auto h-[380px] w-full max-w-[410px]">
+    <article data-reveal="up" className="relative mx-auto h-[380px] w-full max-w-[410px]">
       <OrganicCardShape />
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-11 pb-14 pt-16 text-center">
         <div className="grid h-[96px] w-[96px] place-items-center rounded-full bg-[#f8fbf5] shadow-[0_8px_22px_rgba(111,178,62,0.16)]">
@@ -398,60 +457,89 @@ function FounderSection() {
 }
 
 type StoryItem = {
+  number: string;
   title: string;
   text: string;
   colorClass: string;
-  fillClass: string;
-  ringClass: string;
+  backgroundClass: string;
+  softBackgroundClass: string;
+  fillClass?: string;
+  ringClass?: string;
   icon: IconType;
-  side: "right" | "left";
 };
 
 const foundationStory: StoryItem[] = [
   {
-    title: "بداية السؤال",
-    text: "بدأت الحكاية بسؤال بسيط، لكنه عميق: لماذا يعجز كثير من الأطفال عن القراءة بطلاقة رغم سنوات الدراسة؟",
+    number: "01",
+    title: "المناهج التعليمية",
+    text: "تطوير مناهج وسلاسل تعليمية متكاملة للأطفال في مراحل التعليم المبكر.",
     colorClass: "text-[#6fb23e]",
-    fillClass: "fill-[#70b543]",
-    ringClass: "stroke-[#c5e0b2]",
+    backgroundClass: "bg-[#6fb23e]",
+    softBackgroundClass: "bg-[#edf7e8]",
     icon: FaBookOpen,
-    side: "left",
   },
   {
-    title: "التجربة والبحث",
-    text: "من هذا السؤال انطلقت رحلة البحث والتجربة، التي قادت إلى ظهور كتاب ومنهج نور البيان لتعليم القراءة وتنزيل القرآن.",
-    colorClass: "text-[#c2187a]",
-    fillClass: "fill-[#ce2286]",
-    ringClass: "stroke-[#dc70b1]",
-    icon: FaBrain,
-    side: "right",
+    number: "02",
+    title: "التأسيس اللغوي والقرآني",
+    text: "برامج متدرجة لبناء مهارات القراءة واللغة العربية وتلاوة القرآن الكريم.",
+    colorClass: "text-[#2872a1]",
+    backgroundClass: "bg-[#2872a1]",
+    softBackgroundClass: "bg-[#e7f2f8]",
+    icon: FaLanguage,
   },
   {
-    title: "ظهور نور البيان",
-    text: "ومع مرور الوقت أثبت منهج نور البيان نجاحه في تعليم آلاف الأطفال، وانتشر في العديد من المراكز التعليمية ودور التحفيظ والمدارس.",
+    number: "03",
+    title: "التعليم المبكر والحضانات",
+    text: "حلول تعليمية متكاملة للحضانات ومراكز التعليم في سنوات الطفل الأولى.",
     colorClass: "text-[#f4a62a]",
-    fillClass: "fill-[#f4a51c]",
-    ringClass: "stroke-[#ffd89a]",
-    icon: FaSeedling,
-    side: "left",
+    backgroundClass: "bg-[#f4a62a]",
+    softBackgroundClass: "bg-[#fff3df]",
+    icon: FaSchool,
   },
   {
-    title: "النجاح والانتشار",
-    text: "ومن هنا جاءت فكرة إنشاء دار عوالم البيان ناشرون لتقديم منظومة تعليمية شاملة تدعم الطفل في جميع مهاراته اللغوية والمعرفية.",
-    colorClass: "text-[#6fb23e]",
-    fillClass: "fill-[#70b543]",
-    ringClass: "stroke-[#c5e0b2]",
-    icon: FaBookOpen,
-    side: "right",
-  },
-  {
-    title: "تأسيس الدار",
-    text: "واليوم نواصل رحلتنا في تطوير مناهج تعليمية تسهم في إعداد جيل قارئ واع قادر على فهم لغته والتعبير بها، واكتشاف العالم من حوله بثقة ومعرفة.",
-    colorClass: "text-[#c2187a]",
-    fillClass: "fill-[#ce2286]",
-    ringClass: "stroke-[#dc70b1]",
+    number: "04",
+    title: "تنمية المهارات والتفكير",
+    text: "أنشطة وبرامج تساعد الطفل على التفكير والإبداع وتنمية مهاراته الحياتية.",
+    colorClass: "text-[#7b3f98]",
+    backgroundClass: "bg-[#7b3f98]",
+    softBackgroundClass: "bg-[#f1e9f5]",
     icon: FaBrain,
-    side: "left",
+  },
+  {
+    number: "05",
+    title: "الإنجليزية والفونكس",
+    text: "برامج حديثة لتأسيس الطفل في اللغة الإنجليزية والقراءة الصوتية الصحيحة.",
+    colorClass: "text-[#e7792c]",
+    backgroundClass: "bg-[#e7792c]",
+    softBackgroundClass: "bg-[#fff0e5]",
+    icon: FaLanguage,
+  },
+  {
+    number: "06",
+    title: "الحساب والمهارات الأكاديمية",
+    text: "محتوى مبسط ينمي مهارات الحساب الأساسية والتفكير المنطقي وحل المشكلات.",
+    colorClass: "text-[#c9404c]",
+    backgroundClass: "bg-[#c9404c]",
+    softBackgroundClass: "bg-[#fbeaec]",
+    icon: FaCalculator,
+  },
+  {
+    number: "07",
+    title: "الوسائل التعليمية التفاعلية",
+    text: "ألعاب وبطاقات ووسائل مبتكرة تجعل التعلم أكثر مشاركة ومتعة للأطفال.",
+    colorClass: "text-[#8a6b4b]",
+    backgroundClass: "bg-[#8a6b4b]",
+    softBackgroundClass: "bg-[#f3eee9]",
+    icon: FaPuzzlePiece,
+  },
+  {
+    number: "08",
+    title: "الحلول التعليمية الرقمية",
+    text: "منصات وتجارب رقمية تفاعلية تدعم التعلم في أي وقت ومن أي مكان.",
+    colorClass: "text-[#21618c]",
+    backgroundClass: "bg-[#21618c]",
+    softBackgroundClass: "bg-[#e5f0f7]",
+    icon: FaLaptop,
   },
 ];
 
@@ -459,8 +547,11 @@ function StoryWavyBadge({ item }: { item: StoryItem }) {
   const Icon = item.icon;
 
   return (
-    <div className="relative grid h-[112px] w-[112px] shrink-0 place-items-center md:h-[124px] md:w-[124px]">
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 131 131" fill="none" aria-hidden>
+    <div className={`relative grid size-[78px] shrink-0 place-items-center rounded-[24px] ${item.softBackgroundClass}`}>
+      <div className={`grid size-[54px] place-items-center rounded-2xl text-2xl text-white shadow-[0_8px_18px_rgba(42,57,34,0.14)] ${item.backgroundClass}`}>
+        <Icon aria-hidden />
+      </div>
+      <svg className="hidden" viewBox="0 0 131 131" fill="none" aria-hidden>
         <path
           className={item.ringClass}
           d="M65.5 10.5C68.6 10.5 71.2 14.1 74.2 14.6C77.3 15.1 81 12.6 83.9 13.6C86.9 14.7 88.2 19 90.9 20.5C93.7 22.1 98.1 21.3 100.5 23.3C102.9 25.3 102.8 29.8 104.8 32.2C106.8 34.6 111.2 35.5 112.8 38.2C114.4 40.9 112.8 45.1 113.9 48.1C115 51.1 118.9 53.3 119.4 56.4C119.9 59.4 117 62.8 117 66C117 69.1 119.9 72.6 119.4 75.6C118.9 78.7 115 80.9 113.9 83.9C112.8 86.9 114.4 91.1 112.8 93.8C111.2 96.5 106.8 97.4 104.8 99.8C102.8 102.2 102.9 106.7 100.5 108.7C98.1 110.7 93.7 109.9 90.9 111.5C88.2 113 86.9 117.3 83.9 118.4C81 119.4 77.3 116.9 74.2 117.4C71.2 117.9 68.6 121.5 65.5 121.5C62.4 121.5 59.8 117.9 56.8 117.4C53.7 116.9 50 119.4 47.1 118.4C44.1 117.3 42.8 113 40.1 111.5C37.3 109.9 32.9 110.7 30.5 108.7C28.1 106.7 28.2 102.2 26.2 99.8C24.2 97.4 19.8 96.5 18.2 93.8C16.6 91.1 18.2 86.9 17.1 83.9C16 80.9 12.1 78.7 11.6 75.6C11.1 72.6 14 69.1 14 66C14 62.8 11.1 59.4 11.6 56.4C12.1 53.3 16 51.1 17.1 48.1C18.2 45.1 16.6 40.9 18.2 38.2C19.8 35.5 24.2 34.6 26.2 32.2C28.2 29.8 28.1 25.3 30.5 23.3C32.9 21.3 37.3 22.1 40.1 20.5C42.8 19 44.1 14.7 47.1 13.6C50 12.6 53.7 15.1 56.8 14.6C59.8 14.1 62.4 10.5 65.5 10.5Z"
@@ -470,67 +561,62 @@ function StoryWavyBadge({ item }: { item: StoryItem }) {
         />
         <circle className={item.fillClass} cx="65.5" cy="65.5" r="42" />
       </svg>
-      <Icon className="relative z-10 text-3xl text-white md:text-4xl" aria-hidden />
+      <Icon className="hidden" aria-hidden />
     </div>
   );
 }
 
-function DottedStoryArrow({ flip = false }: { flip?: boolean }) {
+function AreaAccent({ colorClass }: { colorClass: string }) {
   return (
-    <svg
-      className={`pointer-events-none hidden h-[104px] w-[110px] text-[#8f8f8f] lg:block ${flip ? "scale-x-[-1]" : ""}`}
-      viewBox="0 0 110 104"
-      fill="none"
-      aria-hidden
-    >
-      <path
-        d="M64.6 5.5C42.6 5.5 35.2 26.4 48.6 38.3C60.1 48.5 77.1 36.1 67.8 24.8C58.2 13.2 33.4 29.1 34.7 55.9C35.3 68.6 40.6 78.6 48.2 89.1"
-        stroke="currentColor"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeDasharray="8 9"
-      />
-      <path d="M28.2 83.2L49.8 92.1L51.5 68.9" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="8 9" />
-    </svg>
+    <div className="mt-auto flex items-center gap-1.5 pt-5" aria-hidden>
+      <span className={`h-1.5 w-16 rounded-full opacity-30 ${colorClass}`} />
+      <span className={`size-2 rounded-full ${colorClass}`} />
+      <span className={`h-1.5 w-5 rounded-full opacity-30 ${colorClass}`} />
+    </div>
   );
 }
 
-function StoryRow({ item, index }: { item: StoryItem; index: number }) {
-  const isRight = item.side === "right";
-
+function StoryRow({ item }: { item: StoryItem }) {
   return (
-    <div className="relative grid items-center gap-5 lg:grid-cols-[1fr_150px_1fr]">
-      <div className={`${isRight ? "lg:col-start-3" : "lg:col-start-1"} flex items-center gap-5 ${isRight ? "justify-end text-right" : "justify-start text-right lg:flex-row-reverse lg:text-left"}`}>
+    <article data-reveal="up" className="group relative flex min-h-[285px] flex-col overflow-hidden rounded-[28px] border border-[#e4e9e0] bg-white p-6 shadow-[0_10px_30px_rgba(49,67,39,0.07)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_18px_38px_rgba(49,67,39,0.13)]">
+      <div className={`absolute -left-10 -top-12 size-32 rounded-full opacity-[0.08] transition duration-300 group-hover:scale-125 ${item.backgroundClass}`} aria-hidden />
+      <div className="relative z-10 flex items-start justify-between gap-4">
         <StoryWavyBadge item={item} />
-        <div className="max-w-[520px]">
-          <h3 className={`text-2xl font-extrabold leading-normal md:text-[32px] ${item.colorClass}`}>{item.title}</h3>
-          <p className="mt-2 text-lg font-extrabold leading-8 text-[#5b5b5b] md:text-xl">{item.text}</p>
-        </div>
+        <span className={`text-4xl font-black leading-none opacity-20 ${item.colorClass}`}>{item.number}</span>
       </div>
-
-      {index < foundationStory.length - 1 && (
-        <div className="absolute left-1/2 top-[78%] -translate-x-1/2">
-          <DottedStoryArrow flip={index % 2 === 1} />
-        </div>
-      )}
-    </div>
+      <h3 className={`relative z-10 mt-5 text-xl font-extrabold leading-8 ${item.colorClass}`}>{item.title}</h3>
+      <p className="relative z-10 mt-2 text-sm font-bold leading-7 text-[#555d51]">{item.text}</p>
+      <AreaAccent colorClass={item.backgroundClass} />
+    </article>
   );
 }
 
 function FoundationStorySection() {
   return (
-    <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 lg:py-20">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 flex flex-col items-center text-center lg:items-start lg:text-right">
-          <h2 className="text-4xl font-extrabold leading-normal text-[#141219] md:text-5xl">
-            قصة <span className="text-[#c2187a]">التأسيس</span>
-          </h2>
-          <OrangeStroke />
+    <section className="relative overflow-hidden bg-[#f7faf5] px-4 py-16 sm:px-6 lg:py-24">
+      <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_1px_1px,rgba(111,178,62,0.12)_1px,transparent_0)] [background-size:28px_28px]" aria-hidden />
+      <div className="pointer-events-none absolute -right-36 top-20 size-[380px] rounded-full bg-[#6fb23e]/10 blur-3xl" aria-hidden />
+      <div className="pointer-events-none absolute -bottom-40 left-0 size-[380px] rounded-full bg-[#c2187a]/8 blur-3xl" aria-hidden />
+
+      <div className="relative z-10 mx-auto max-w-[1400px]">
+        <div className="mb-12 grid items-end gap-7 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          <div>
+            <span className="inline-flex rounded-full bg-[#e9f5e1] px-4 py-2 text-sm font-extrabold text-[#5b9f2d]">حلول تعليمية متكاملة</span>
+            <h2 className="mt-4 text-4xl font-extrabold leading-normal text-[#141219] md:text-5xl lg:text-6xl">
+              مجالات <span className="text-[#c2187a]">عملنا</span>
+            </h2>
+            <OrangeStroke />
+          </div>
+          <div className="border-r-4 border-[#6fb23e] pr-5">
+            <p className="max-w-2xl text-lg font-bold leading-9 text-[#50574d] md:text-xl">
+              نقدم منظومة من الحلول والبرامج التعليمية تجمع بين الجودة والابتكار والتقنية، لتلبية احتياجات الطفل في كل مرحلة من رحلته التعليمية.
+            </p>
+          </div>
         </div>
 
-        <div className="relative mx-auto flex max-w-6xl flex-col gap-8 lg:gap-7">
-          {foundationStory.map((item, index) => (
-            <StoryRow key={item.title} item={item} index={index} />
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {foundationStory.map((item) => (
+            <StoryRow key={item.title} item={item} />
           ))}
         </div>
       </div>
@@ -560,45 +646,107 @@ function ImpactIcon() {
 
 function ImpactStatsSection() {
   return (
-    <section className="relative overflow-x-clip overflow-y-visible bg-white px-4 py-14 sm:px-6 lg:py-16">
-      <div className="absolute inset-y-8 left-1/2 w-screen -translate-x-1/2 bg-[#edf7e8]" aria-hidden>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_50%,rgba(111,178,62,0.18),transparent_34%),linear-gradient(90deg,rgba(111,178,62,0.10),rgba(111,178,62,0.04))]" />
-        <div className="absolute inset-x-0 top-0 h-12 bg-[radial-gradient(22px_14px_at_10px_4px,#fff_98%,transparent_100%),radial-gradient(36px_22px_at_58px_8px,#fff_98%,transparent_100%),radial-gradient(24px_18px_at_106px_0px,#fff_98%,transparent_100%)] bg-repeat-x [background-size:132px_42px]" />
-        <div className="absolute inset-x-0 bottom-0 h-12 rotate-180 bg-[radial-gradient(22px_14px_at_10px_4px,#fff_98%,transparent_100%),radial-gradient(36px_22px_at_58px_8px,#fff_98%,transparent_100%),radial-gradient(24px_18px_at_106px_0px,#fff_98%,transparent_100%)] bg-repeat-x [background-size:132px_42px]" />
-      </div>
+    <section className="relative overflow-hidden bg-[#f8faf6] px-4 py-16 sm:px-6 lg:py-24">
+      <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_1px_1px,rgba(111,178,62,0.13)_1px,transparent_0)] [background-size:30px_30px]" aria-hidden />
+      <div className="pointer-events-none absolute -right-40 top-10 size-[420px] rounded-full bg-[#6fb23e]/10 blur-3xl" aria-hidden />
+      <div className="pointer-events-none absolute -bottom-48 left-[15%] size-[420px] rounded-full bg-[#f4a62a]/10 blur-3xl" aria-hidden />
 
-      <div className="pointer-events-none absolute right-[8%] top-8 hidden -rotate-[22deg] text-6xl font-black tracking-[2px] text-[#d8d8d8]/70 lg:block" aria-hidden>
-        ABC
-      </div>
-      <div className="pointer-events-none absolute bottom-0 left-1/2 hidden h-24 w-36 -translate-x-1/2 opacity-20 lg:block" aria-hidden>
-        <svg viewBox="0 0 120 90" fill="none" className="h-full w-full text-[#d8d8d8]">
-          <path d="M14 30L58 12L104 30L58 48L14 30Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
-          <path d="M30 38V56C44 69 74 69 88 56V38" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      </div>
+      <div className="relative z-10 mx-auto max-w-[1400px]">
+        <div className="mb-12 flex flex-col items-center text-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-[#e8f4e0] px-5 py-2 text-sm font-extrabold text-[#568f31]">
+            <FaGlobeAfrica aria-hidden />
+            أثر يتجاوز الحدود
+          </span>
+          <h2 className="mt-4 text-4xl font-extrabold leading-normal text-[#175c37] sm:text-5xl lg:text-6xl">
+            الانتشار <span className="text-[#17385f]">والتوسع</span>
+          </h2>
+          <p className="mt-3 max-w-3xl text-lg font-bold leading-8 text-[#4f584b] md:text-xl">
+            نصل بمحتوانا التعليمي الموثوق إلى أطفال ومؤسسات تعليمية في دول متعددة حول العالم.
+          </p>
+        </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1fr_520px]">
-        <div className="order-2 grid gap-x-12 gap-y-8 sm:grid-cols-2 lg:order-1 lg:gap-y-10">
-          {impactStats.map((stat) => (
-            <div key={stat.value} className="flex items-center justify-center gap-5 text-right sm:justify-end">
-              <div>
-                <p className="text-2xl font-extrabold leading-normal text-[#f4a62a] md:text-[28px]">{stat.value}</p>
-                <p className="mt-1 max-w-[170px] text-xl font-extrabold leading-8 text-[#3f3f3f]">{stat.label}</p>
+        <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
+          <article className="relative flex min-h-[430px] flex-col items-center justify-center overflow-hidden rounded-[34px] bg-gradient-to-br from-[#174e31] via-[#0f6237] to-[#083c25] px-7 py-10 text-center text-white shadow-[0_22px_50px_rgba(13,75,42,0.22)]">
+            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:24px_24px]" aria-hidden />
+            <div className="absolute -left-20 -top-20 size-56 rounded-full border-[34px] border-[#d7b24b]/15" aria-hidden />
+            <div className="relative z-10">
+              <FaCrown className="mx-auto text-5xl text-[#e8c35a]" aria-hidden />
+              <p className="mt-4 text-2xl font-extrabold">المنهج رقم</p>
+              <p className="bg-gradient-to-b from-[#fff2a6] via-[#e8c35a] to-[#b98220] bg-clip-text text-[112px] font-black leading-none text-transparent drop-shadow-sm">1</p>
+              <div className="mx-auto mt-2 h-px w-36 bg-gradient-to-r from-transparent via-[#e8c35a] to-transparent" />
+              <p className="mt-6 text-xl font-extrabold leading-9">
+                في نيجيريا، غينيا، مالي
+                <span className="block text-[#f5d97e]">ومعظم دول غرب أفريقيا المسلمة</span>
+              </p>
+            </div>
+          </article>
+
+          <article className="relative overflow-hidden rounded-[34px] border border-[#dce7d6] bg-white p-6 shadow-[0_18px_45px_rgba(40,65,27,0.1)] sm:p-8">
+            <div className="absolute -left-24 -bottom-24 size-64 rounded-full bg-[#6fb23e]/10 blur-2xl" aria-hidden />
+            <div className="relative z-10">
+              <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-right">
+                <div>
+                  <p className="text-sm font-extrabold text-[#6fb23e]">جودة موثقة</p>
+                  <h3 className="mt-2 text-2xl font-extrabold leading-10 text-[#17385f] sm:text-3xl">
+                    موثوق ومعتمد في
+                    <span className="block text-[#17643a]">المملكة العربية السعودية</span>
+                  </h3>
+                </div>
+                <div className="grid size-20 shrink-0 place-items-center rounded-full bg-[#edf7e8] text-4xl text-[#17643a]">
+                  <FaAward aria-hidden />
+                </div>
               </div>
+
+              <div className="mt-7 grid items-stretch gap-6 sm:grid-cols-[0.8fr_1.2fr]">
+                <div className="relative mx-auto flex min-h-[230px] w-full max-w-[210px] flex-col items-center justify-center overflow-hidden rounded-lg border-[7px] border-[#17643a] bg-[#fffef8] p-5 text-center shadow-[0_12px_25px_rgba(23,100,58,0.18)]">
+                  <div className="absolute inset-2 border border-[#d8c384]" aria-hidden />
+                  <FaAward className="relative z-10 text-4xl text-[#c59d32]" aria-hidden />
+                  <p className="relative z-10 mt-4 text-lg font-extrabold text-[#17643a]">شهادة اعتماد</p>
+                  <p className="relative z-10 mt-2 text-xs font-bold leading-5 text-[#62675f]">المملكة العربية السعودية</p>
+                  <span className="relative z-10 mt-5 h-px w-20 bg-[#d8c384]" />
+                  <p className="relative z-10 mt-3 text-[10px] font-bold text-[#8a8f86]">توضع صورة الشهادة الأصلية هنا</p>
+                </div>
+
+                <ul className="flex flex-col justify-center gap-3">
+                  {["محتوى موثق", "يتوافق مع المعايير التعليمية", "خاضع لإشراف تربوي متخصص", "مناسب للمناهج والمدارس والمراكز التعليمية"].map((item) => (
+                    <li key={item} className="flex items-start gap-3 rounded-2xl bg-[#f5f9f2] px-4 py-3 text-sm font-extrabold leading-6 text-[#344130]">
+                      <FaCheckCircle className="mt-1 shrink-0 text-[#45a557]" aria-hidden />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div className="mt-6 grid overflow-hidden rounded-[34px] bg-white shadow-[0_18px_45px_rgba(40,65,27,0.1)] lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative min-h-[300px] overflow-hidden">
+            <Image src="/photo_2026-06-09_20-55-30.jpg" alt="أطفال يتعلمون بمنهج عوالم البيان" fill sizes="(max-width: 1024px) 100vw, 600px" className="object-cover object-center" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#123d25]/35 via-transparent to-transparent" />
+          </div>
+          <div className="flex flex-col justify-center p-7 sm:p-10">
+            <h3 className="text-2xl font-extrabold leading-10 text-[#17643a] sm:text-3xl">منهج موثوق لمعظم المتعلمين</h3>
+            <p className="mt-3 text-base font-bold leading-8 text-[#555e51]">لتعلم العربية وقراءة القرآن الكريم، بمحتوى متدرج يناسب الأعمار المختلفة ويصل إلى متعلمين حول العالم.</p>
+            <div className="mt-6 flex items-center gap-4 rounded-2xl bg-[#f2f8ee] p-4">
               <ImpactIcon />
+              <p className="text-sm font-extrabold leading-7 text-[#3e4b39]">تعلم مبني على الفهم والتدرج والممارسة، من خلال كتب وبرامج تعليمية متكاملة.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 grid overflow-hidden rounded-[28px] bg-[#0f4f30] text-white shadow-[0_18px_38px_rgba(15,79,48,0.2)] sm:grid-cols-2 xl:grid-cols-4">
+          {impactStats.map((stat, index) => (
+            <div key={stat.value} className={`relative px-5 py-7 text-center ${index > 0 ? "border-t border-white/15 sm:border-r sm:border-t-0" : ""}`}>
+              <p className="text-2xl font-black text-[#f4cd63] sm:text-3xl">{stat.value}</p>
+              <p className="mt-2 text-sm font-extrabold leading-6 text-white/90">{stat.label}</p>
             </div>
           ))}
         </div>
 
-        <div className="order-1 flex justify-center lg:order-2 lg:justify-center">
-          <Image
-            src="/book-product.png"
-            alt="كتب نور البيان"
-            width={560}
-            height={500}
-            className="h-auto w-[320px] max-w-full object-contain drop-shadow-[0_18px_26px_rgba(0,0,0,0.16)] sm:w-[430px] lg:-my-20 lg:w-[560px]"
-          />
-        </div>
+        <p className="mt-8 text-center text-xl font-extrabold leading-9 text-[#17385f] sm:text-2xl">
+          عوالم البيان... <span className="text-[#c18a23]">نبني الجيل، وننشر العلم، ونصل إلى كل قلب مسلم</span>
+        </p>
       </div>
     </section>
   );
@@ -722,11 +870,11 @@ export default function AboutPage() {
     <main className={`min-h-screen overflow-x-hidden bg-white ${almarai.className}`}>
       <PageHero />
       <AboutFoundationSection />
-      <FamousSeriesSection />
       <FounderSection />
+      <VisionMissionSection />
+      <FamousSeriesSection />
       <FoundationStorySection />
       <ImpactStatsSection />
-      <VisionMissionSection />
     </main>
   );
 }
