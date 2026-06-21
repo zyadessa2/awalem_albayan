@@ -112,7 +112,7 @@ function FieldControl({
   field: AdminField;
   value: string | boolean | string[];
   onChange: (value: string | boolean | string[]) => void;
-  onUpload?: (file: File) => void;
+  onUpload?: (files: File[]) => void;
   isUploading?: boolean;
 }) {
   const inputClass =
@@ -182,24 +182,41 @@ function FieldControl({
           <input
             type="file"
             accept="image/*"
+            multiple={field.type === "textarea-list"}
             disabled={isUploading}
             onChange={(event) => {
-              const file = event.target.files?.[0];
-              if (file) onUpload?.(file);
+              const files = Array.from(event.target.files ?? []);
+              if (files.length > 0) onUpload?.(field.type === "textarea-list" ? files : files.slice(0, 1));
               event.target.value = "";
             }}
             className="block w-full text-xs text-[#697586] file:ml-3 file:rounded-lg file:border-0 file:bg-[#eef8e8] file:px-3 file:py-2 file:text-sm file:font-bold file:text-[#17202a]"
           />
-          {isUploading ? <span className="mt-1 block text-xs font-bold text-[#697586]">جاري الرفع...</span> : null}
+          {field.type === "textarea-list" && !isUploading ? <span className="mt-1 block text-xs font-normal text-[#697586]">يمكنك اختيار أكثر من صورة ورفعها دفعة واحدة.</span> : null}
+          {isUploading ? <span className="mt-1 block text-xs font-bold text-[#697586]">جاري رفع الصور...</span> : null}
         </span>
       ) : null}
 
       {previews.length > 0 ? (
         <span className="mt-3 grid grid-cols-3 gap-2">
-          {previews.map((url) => (
-            <span key={url} className="relative h-20 overflow-hidden rounded-lg border border-[#d9dee8] bg-[#f5f7fa]">
+          {previews.map((url, index) => (
+            <span key={`${url}-${index}`} className="relative h-24 overflow-hidden rounded-lg border border-[#d9dee8] bg-[#f5f7fa]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={url} alt="" className="h-full w-full object-cover" />
+              <span className="absolute bottom-1 right-1 grid size-5 place-items-center rounded-full bg-black/65 text-[10px] font-bold text-white">{index + 1}</span>
+              <button
+                type="button"
+                aria-label={`حذف الصورة ${index + 1}`}
+                onClick={() => {
+                  if (field.type === "textarea-list") {
+                    onChange(previews.filter((_, previewIndex) => previewIndex !== index).join("\n"));
+                  } else {
+                    onChange("");
+                  }
+                }}
+                className="absolute left-1 top-1 grid size-6 place-items-center rounded-full bg-[#b42318] text-sm font-bold text-white shadow-sm transition hover:bg-[#8f1c13]"
+              >
+                ×
+              </button>
             </span>
           ))}
         </span>
@@ -348,29 +365,31 @@ export default function AdminResourcePage({ title, description, endpoint, fields
     }
   }
 
-  async function handleUpload(field: AdminField, file: File) {
+  async function handleUpload(field: AdminField, files: File[]) {
     setUploadingField(field.name);
     setMessage("");
 
     try {
-      const formData = new FormData();
-      formData.append("file", file);
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append("file", file);
 
-      const response = await fetch("/api/uploads", { method: "POST", body: formData });
-      const json = await response.json();
-      if (!response.ok) throw new Error(json.error?.message || "تعذر رفع الصورة.");
+        const response = await fetch("/api/uploads", { method: "POST", body: formData });
+        const json = await response.json();
+        if (!response.ok) throw new Error(json.error?.message || `تعذر رفع الصورة: ${file.name}`);
 
-      const url = String(json.data?.url || "");
+        const url = String(json.data?.url || "");
 
-      setForm((current) => {
-        const previousValue = current[field.name];
-        if (field.type === "textarea-list") {
-          const previousText = typeof previousValue === "string" ? previousValue : "";
-          return { ...current, [field.name]: previousText ? `${previousText}\n${url}` : url };
-        }
+        setForm((current) => {
+          const previousValue = current[field.name];
+          if (field.type === "textarea-list") {
+            const previousText = typeof previousValue === "string" ? previousValue : "";
+            return { ...current, [field.name]: previousText ? `${previousText}\n${url}` : url };
+          }
 
-        return { ...current, [field.name]: url };
-      });
+          return { ...current, [field.name]: url };
+        });
+      }
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "تعذر رفع الصورة.");
     } finally {
@@ -403,7 +422,7 @@ export default function AdminResourcePage({ title, description, endpoint, fields
                 field={field}
                 value={form[field.name]}
                 onChange={(value) => setForm((current) => ({ ...current, [field.name]: value }))}
-                onUpload={(file) => void handleUpload(field, file)}
+                onUpload={(files) => void handleUpload(field, files)}
                 isUploading={uploadingField === field.name}
               />
             ))}
