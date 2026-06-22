@@ -1,10 +1,7 @@
 import Book from "@/models/Book";
 import BookSeries from "@/models/BookSeries";
 import Course from "@/models/Course";
-import {
-  deleteHostingerUploadsByUrls,
-  getHostingerUploadKeyFromUrl,
-} from "@/lib/uploads/hostinger";
+import { deleteS3UploadsByUrls, getS3UploadKeyFromUrl } from "@/lib/uploads/s3";
 
 function uniqueUrls(urls: Array<string | null | undefined>) {
   return Array.from(new Set(urls.filter((url): url is string => Boolean(url?.trim()))));
@@ -40,14 +37,14 @@ async function getReferencedImageUrls(urls: string[]) {
 }
 
 export async function deleteUnusedUploadedImages(urls: string[]) {
-  const hostingerUrls = uniqueUrls(urls).filter((url) => Boolean(getHostingerUploadKeyFromUrl(url)));
+  const s3Urls = uniqueUrls(urls).filter((url) => Boolean(getS3UploadKeyFromUrl(url)));
 
-  if (hostingerUrls.length === 0) {
+  if (s3Urls.length === 0) {
     return { deleted: 0 };
   }
 
-  const referencedUrls = await getReferencedImageUrls(hostingerUrls);
-  const unusedUrls = hostingerUrls.filter((url) => !referencedUrls.has(url));
+  const referencedUrls = await getReferencedImageUrls(s3Urls);
+  const unusedUrls = s3Urls.filter((url) => !referencedUrls.has(url));
 
-  return deleteHostingerUploadsByUrls(unusedUrls);
+  return deleteS3UploadsByUrls(unusedUrls);
 }

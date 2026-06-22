@@ -1,3 +1,4 @@
+// Legacy Hostinger uploader. Kept for reference but no longer used by the upload route.
 type UploadFileInput = {
   buffer: Buffer;
   contentType: string;
