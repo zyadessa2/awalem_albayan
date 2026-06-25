@@ -146,7 +146,7 @@ export default function ProductCard({ title, description, button, imageSrc, kind
 
   return (
     <article className="relative mt-3 flex w-[min(100%,392px)] flex-col items-center justify-center rounded-3xl bg-white px-[11px] pb-3 pt-3 text-[#111] shadow-[0_-1px_18px_0_rgba(0,0,0,0.24)] max-md:mx-auto">
-      <div className="relative mx-auto -mt-[136px] mb-3 h-[207.672px] w-[192.857px] rounded-[20px] bg-[#fef6ea]">
+      <div className="relative mx-auto -mt-[136px] mb-3 h-[207.672px] w-[192.857px] rounded-[20px] bg-[#f4f4f4]">
         <div className="absolute left-1/2 top-1/2 h-[209.83px] w-[206.144px] -translate-x-1/2 -translate-y-1/2 [aspect-ratio:56/57]">
           <Image src={imageSrc} alt={title} fill sizes="206px" className="object-contain object-center" />
         </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Almarai } from "next/font/google";
 import BookPreviewGallery from "@/components/books/BookPreviewGallery";
 import JsonLd from "@/components/seo/JsonLd";
@@ -7,6 +8,31 @@ import { getPublishedBook } from "@/lib/data/content";
 import { absoluteUrl, createPageMetadata, SITE_NAME, trimDescription } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+type PublishedBook = NonNullable<Awaited<ReturnType<typeof getPublishedBook>>>;
+
+function bookMatchesRoute(book: PublishedBook, seriesId: string) {
+  let normalizedSeriesId = seriesId;
+  try {
+    normalizedSeriesId = decodeURIComponent(seriesId);
+  } catch {
+    // The original value is still safe to compare and will fail closed.
+  }
+
+  if (normalizedSeriesId === "standalone") {
+    return !book.seriesId;
+  }
+
+  if (!book.seriesId) {
+    return false;
+  }
+
+  if (typeof book.seriesId === "string") {
+    return book.seriesId === normalizedSeriesId;
+  }
+
+  return book.seriesId._id === normalizedSeriesId || book.seriesId.slug === normalizedSeriesId;
+}
 
 export async function generateMetadata({
   params,
@@ -16,7 +42,7 @@ export async function generateMetadata({
   const { seriesId, bookId } = await params;
   const book = await getPublishedBook(bookId);
 
-  if (!book) {
+  if (!book || !bookMatchesRoute(book, seriesId)) {
     return createPageMetadata({
       title: "كتاب تعليمي",
       path: `/books/${seriesId}/${bookId}`,
@@ -74,13 +100,14 @@ function PreviewBackground() {
 export default async function BookDetailsPage({ params }: { params: Promise<{ seriesId: string; bookId: string }> }) {
   const { seriesId, bookId } = await params;
   const book = await getPublishedBook(bookId);
-  const title = book?.title || "كتاب نور البيان";
-  const description =
-    book?.description ||
-    "كتاب تعليمي يساعد الطفل على تنمية مهارات القراءة والنطق بثقة.";
-  const actionUrl = book?.whatsappUrl || book?.buyUrl || "#";
-  const bookJsonLd = book
-    ? {
+  if (!book || !bookMatchesRoute(book, seriesId)) {
+    notFound();
+  }
+
+  const title = book.title;
+  const description = book.description || "كتاب تعليمي يساعد الطفل على تنمية مهارات القراءة والنطق بثقة.";
+  const actionUrl = book.whatsappUrl || book.buyUrl || "https://wa.me/201033768477";
+  const bookJsonLd = {
         "@context": "https://schema.org",
         "@type": "Book",
         name: book.title,
@@ -92,16 +119,15 @@ export default async function BookDetailsPage({ params }: { params: Promise<{ se
           name: SITE_NAME,
           url: absoluteUrl("/"),
         },
-      }
-    : null;
+      };
 
   return (
     <main className={`min-h-screen overflow-x-hidden bg-white ${almarai.className}`}>
-      {bookJsonLd ? <JsonLd data={bookJsonLd} /> : null}
+      <JsonLd data={bookJsonLd} />
       <section className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-12 pt-[128px] sm:px-6 sm:pt-[150px] lg:grid-cols-[320px_minmax(0,1fr)] lg:items-center lg:gap-16 lg:pb-16">
         <div className="order-2 flex justify-center lg:order-1 lg:justify-start">
           <div className="relative h-[230px] w-[230px] rounded-[22px] bg-[#fef6ea] sm:h-[286px] sm:w-[286px]">
-            <Image src={book?.coverImage || "/book-product.png"} alt={title} fill sizes="286px" className="scale-110 object-contain object-center drop-shadow-[0_18px_20px_rgba(0,0,0,0.18)]" priority />
+            <Image src={book.coverImage || "/book-product.png"} alt={title} fill sizes="286px" className="scale-110 object-contain object-center drop-shadow-[0_18px_20px_rgba(0,0,0,0.18)]" priority />
           </div>
         </div>
 
@@ -132,7 +158,7 @@ export default async function BookDetailsPage({ params }: { params: Promise<{ se
         </div>
 
         <div className="relative z-10 mt-12">
-          <BookPreviewGallery images={book?.previewImages} />
+          <BookPreviewGallery images={book.previewImages} />
         </div>
       </section>
     </main>

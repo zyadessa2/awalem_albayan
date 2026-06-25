@@ -68,15 +68,25 @@ async function withDatabase<T>(fallback: T, callback: () => Promise<T>) {
   try {
     await connectMongoDB();
     return await callback();
-  } catch {
+  } catch (error) {
+    console.error("Public content database query failed:", error);
     return fallback;
   }
 }
 
 function identifierFilter(identifier: string) {
-  return isValidObjectId(identifier)
-    ? { _id: identifier, isPublished: true }
-    : { slug: identifier, isPublished: true };
+  let normalizedIdentifier = identifier;
+
+  // Dynamic route params can contain URL-encoded Arabic slugs in Next.js 16.
+  try {
+    normalizedIdentifier = decodeURIComponent(identifier);
+  } catch {
+    // Keep the original value when a malformed escape sequence is received.
+  }
+
+  return isValidObjectId(normalizedIdentifier)
+    ? { _id: normalizedIdentifier, isPublished: true }
+    : { slug: normalizedIdentifier, isPublished: true };
 }
 
 function toEnglishDigits(value: string) {

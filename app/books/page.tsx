@@ -32,14 +32,6 @@ type SeriesCardItem = {
   bookCount?: number;
 };
 
-const fallbackSeries = Array.from({ length: 4 }, (_, index) => ({
-  id: index + 1,
-  tag: index % 2 === 0 ? "الأكثر مبيعا" : "الأكثر شهرة",
-  title: "سلسلة كتب نور البيان",
-  description: "تعلم مع سلسلة نور البيان لبناء مهارات الأطفال في القراءة والتعلم.",
-  imageSrc: "/book-product.png",
-}));
-
 function OrangeStroke({ className = "" }: { className?: string }) {
   return (
     <svg className={`mt-2 h-[17px] w-[253px] max-w-full ${className}`} width="249" height="18" viewBox="0 0 249 18" fill="none" aria-hidden>
@@ -206,24 +198,21 @@ export default async function BooksPage() {
     getPublishedStandaloneBooks(),
   ]);
 
-  const visibleSeries: SeriesCardItem[] =
-    publishedSeries.length > 0
-      ? publishedSeries.map((item, index) => ({
-          id: item._id,
-          tag: index % 2 === 0 ? "الأكثر مبيعا" : "الأكثر شهرة",
-          title: item.title,
-          description: item.description,
-          imageSrc: item.image || "/book-product.png",
-          bookCount: item.bookCount,
-        }))
-      : fallbackSeries;
+  const visibleSeries: SeriesCardItem[] = publishedSeries.map((item, index) => ({
+    id: item.slug || item._id,
+    tag: index % 2 === 0 ? "الأكثر مبيعا" : "الأكثر شهرة",
+    title: item.title,
+    description: item.description || "سلسلة تعليمية متدرجة تساعد الطفل على التعلم بأسلوب بسيط وممتع.",
+    imageSrc: item.image || "/book-product.png",
+    bookCount: item.bookCount,
+  }));
 
   const visibleSingleBooks = publishedStandaloneBooks.map((book) => ({
     id: book._id,
     title: book.title,
-    description: book.description,
+    description: book.description || "كتاب تعليمي ممتع يساعد الطفل على تنمية مهاراته خطوة بخطوة.",
     imageSrc: book.coverImage || "/book-product.png",
-    href: `/books/standalone/${book._id}`,
+    href: `/books/standalone/${book.slug || book._id}`,
   }));
 
   return (
@@ -233,11 +222,17 @@ export default async function BooksPage() {
       <section id="book-series" className="relative scroll-mt-28 overflow-hidden bg-white px-4 py-16 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <SectionTitle black="سلاسل" pink="الكتب" />
-          <div className="grid grid-cols-1 gap-x-8 gap-y-10 pt-6 xl:grid-cols-2">
-            {visibleSeries.map((item) => (
-              <SeriesCard key={item.id} item={item} />
-            ))}
-          </div>
+          {visibleSeries.length > 0 ? (
+            <div className="grid grid-cols-1 gap-x-8 gap-y-10 pt-6 xl:grid-cols-2">
+              {visibleSeries.map((item) => (
+                <SeriesCard key={item.id} item={item} />
+              ))}
+            </div>
+          ) : (
+            <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-dashed border-[#c5e0b2] bg-[#f7fbf4] px-6 py-8 text-center text-base font-bold leading-8 text-[#525252]">
+              لا توجد سلاسل كتب منشورة حتى الآن.
+            </div>
+          )}
         </div>
       </section>
 

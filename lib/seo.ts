@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 
 export const SITE_NAME = "عوالم البيان";
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://awalimbayan.com").replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.awalimalbayan.com").replace(/\/$/, "");
 export const DEFAULT_OG_IMAGE = "/awalim-icon-512.png";
 export const DEFAULT_DESCRIPTION =
   "عوالم البيان منظومة تعليمية عربية للأطفال تقدم دورات وكتب وسلاسل تعليمية تساعد الطفل على القراءة والفهم وبناء مهارات اللغة العربية بثقة ومتعة.";
+export const SITE_ALTERNATE_NAMES = ["Awalim Al Bayan", "Awalim Albayan", "عوالم البيان ناشرون"];
 
 export const SEO_KEYWORDS = [
   "عوالم البيان",
@@ -34,7 +35,7 @@ export function createPageMetadata({
   image = DEFAULT_OG_IMAGE,
   noIndex = false,
 }: {
-  title?: string;
+  title?: string | { absolute: string };
   description?: string;
   path?: string;
   image?: string;
@@ -42,16 +43,23 @@ export function createPageMetadata({
 }): Metadata {
   const canonical = absoluteUrl(path);
   const imageUrl = absoluteUrl(image);
+  const displayTitle = typeof title === "string" ? title : title?.absolute;
+  const socialTitle = displayTitle && displayTitle !== SITE_NAME ? `${displayTitle} | ${SITE_NAME}` : SITE_NAME;
 
   return {
     title,
     description,
+    applicationName: SITE_NAME,
+    authors: [{ name: SITE_NAME, url: SITE_URL }],
+    creator: SITE_NAME,
+    publisher: SITE_NAME,
+    category: "education",
     keywords: SEO_KEYWORDS,
     alternates: {
       canonical,
     },
     openGraph: {
-      title: title ? `${title} | ${SITE_NAME}` : SITE_NAME,
+      title: socialTitle,
       description,
       url: canonical,
       siteName: SITE_NAME,
@@ -68,9 +76,12 @@ export function createPageMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: title ? `${title} | ${SITE_NAME}` : SITE_NAME,
+      title: socialTitle,
       description,
       images: [imageUrl],
+    },
+    other: {
+      "alternate-name": SITE_ALTERNATE_NAMES,
     },
     robots: noIndex
       ? {

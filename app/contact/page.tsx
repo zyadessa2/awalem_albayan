@@ -25,7 +25,7 @@ const almarai = Almarai({
 
 const contacts = [
   { icon: FaWhatsapp, label: "واتساب", text: "201033768477", href: "https://wa.me/201033768477", dir: "ltr" },
-  { icon: FaEnvelope, label: "الموقع الإلكتروني", text: "Awalimbayan.com", href: "https://Awalimbayan.com", dir: "ltr" },
+  { icon: FaEnvelope, label: "الموقع الإلكتروني", text: "Awalimalbayan.com", href: "https://www.awalimalbayan.com", dir: "ltr" },
   { icon: FaMapMarkerAlt, label: "العنوان", text: "جمهورية مصر العربية - الشرقية - العاشر من رمضان", dir: "rtl" },
 ];
 

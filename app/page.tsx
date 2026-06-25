@@ -10,6 +10,7 @@ import { absoluteUrl, createPageMetadata, DEFAULT_DESCRIPTION, SITE_NAME } from 
 export const dynamic = "force-dynamic";
 
 export const metadata = createPageMetadata({
+  title: { absolute: SITE_NAME },
   description: DEFAULT_DESCRIPTION,
   path: "/",
 });
@@ -35,6 +36,7 @@ export default function Home() {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: SITE_NAME,
+      alternateName: ["Awalim Al Bayan", "Awalim Albayan", "عوالم البيان ناشرون"],
       url: absoluteUrl("/"),
       logo: absoluteUrl("/awalim-icon-512.png"),
     },
@@ -42,6 +44,7 @@ export default function Home() {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: SITE_NAME,
+      alternateName: ["Awalim Al Bayan", "Awalim Albayan"],
       url: absoluteUrl("/"),
       inLanguage: "ar-EG",
     },

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Almarai } from "next/font/google";
 import ProductCard from "@/components/home/ProductCard";
 import JsonLd from "@/components/seo/JsonLd";
@@ -62,9 +63,12 @@ function PageTexture() {
 export default async function SeriesDetailsPage({ params }: { params: Promise<{ seriesId: string }> }) {
   const { seriesId } = await params;
   const series = await getPublishedBookSeriesByIdentifier(seriesId);
-  const books = series ? await getPublishedBooksBySeries(series._id) : [];
-  const seriesJsonLd = series
-    ? {
+  if (!series) {
+    notFound();
+  }
+
+  const books = await getPublishedBooksBySeries(series._id);
+  const seriesJsonLd = {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         name: series.title,
@@ -76,12 +80,11 @@ export default async function SeriesDetailsPage({ params }: { params: Promise<{ 
           name: SITE_NAME,
           url: absoluteUrl("/"),
         },
-      }
-    : null;
+      };
 
   return (
     <main className={`min-h-screen overflow-x-hidden bg-white ${almarai.className}`}>
-      {seriesJsonLd ? <JsonLd data={seriesJsonLd} /> : null}
+      <JsonLd data={seriesJsonLd} />
       <section className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 pb-8 pt-[128px] sm:px-6 sm:pb-12 sm:pt-[150px] lg:flex-row lg:items-end lg:gap-14">
         <div className="order-2 flex-1 text-center lg:order-1 lg:text-right">
           <div className="mb-5 flex justify-center lg:justify-start">
@@ -89,17 +92,17 @@ export default async function SeriesDetailsPage({ params }: { params: Promise<{ 
           </div>
 
           <h1 className="text-[32px] font-extrabold leading-normal text-[#141219] sm:text-[42px] lg:text-5xl">
-            {series?.title || "سلسلة كتب نور البيان"}
+            {series.title}
           </h1>
 
           <p className="mx-auto mt-4 max-w-[930px] text-base font-bold leading-8 text-[#525252] sm:text-xl sm:leading-9 lg:mx-0">
-            {series?.description || "سلاسل تعليمية وكتب تساعد الأطفال على التعلم بأسلوب بسيط وممتع."}
+            {series.description || "سلسلة تعليمية متدرجة تساعد الأطفال على التعلم بأسلوب بسيط وممتع."}
           </p>
         </div>
 
         <div className="order-1 flex justify-center lg:order-2 lg:w-[240px] lg:justify-start">
           <div className="relative h-[180px] w-[180px] rounded-[20px] bg-[#fef6ea] sm:h-[214px] sm:w-[206px]">
-            <Image src={series?.image || "/book-product.png"} alt={series?.title || "سلسلة كتب"} fill sizes="220px" className="scale-110 object-contain object-center drop-shadow-[0_12px_16px_rgba(0,0,0,0.16)]" priority />
+            <Image src={series.image || "/book-product.png"} alt={series.title} fill sizes="220px" className="scale-110 object-contain object-center drop-shadow-[0_12px_16px_rgba(0,0,0,0.16)]" priority />
           </div>
         </div>
       </section>
@@ -112,11 +115,17 @@ export default async function SeriesDetailsPage({ params }: { params: Promise<{ 
             كتب <span className="text-[#f4a62a]">السلسلة</span>
           </h2>
 
-          <div className="grid grid-cols-1 gap-x-8 gap-y-36 md:grid-cols-2 xl:grid-cols-4">
-            {books.map((book) => (
-              <ProductCard key={book._id} title={book.title} description={book.description} button="شراء الكتاب" imageSrc={book.coverImage || "/book-product.png"} kind="book" showBookCount={false} href={`/books/${seriesId}/${book._id}`} />
-            ))}
-          </div>
+          {books.length > 0 ? (
+            <div className="grid grid-cols-1 gap-x-8 gap-y-36 md:grid-cols-2 xl:grid-cols-4">
+              {books.map((book) => (
+                <ProductCard key={book._id} title={book.title} description={book.description || "كتاب تعليمي ممتع ضمن هذه السلسلة."} button="شراء الكتاب" imageSrc={book.coverImage || "/book-product.png"} kind="book" showBookCount={false} href={`/books/${series.slug || seriesId}/${book.slug || book._id}`} />
+              ))}
+            </div>
+          ) : (
+            <div className="mx-auto max-w-2xl rounded-2xl border border-dashed border-[#c5e0b2] bg-white/70 px-6 py-8 text-center text-base font-bold leading-8 text-[#525252]">
+              لا توجد كتب منشورة داخل هذه السلسلة حتى الآن.
+            </div>
+          )}
         </div>
       </section>
     </main>

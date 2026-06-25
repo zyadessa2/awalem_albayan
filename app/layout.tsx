@@ -4,7 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/home/Footer";
 import InstallPrompt from "@/components/pwa/InstallPrompt";
 import MotionExperience from "@/components/motion/MotionExperience";
-import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SEO_KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SEO_KEYWORDS, SITE_ALTERNATE_NAMES, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const cairo = Cairo({
@@ -19,6 +19,11 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "education",
   keywords: SEO_KEYWORDS,
   manifest: "/manifest.webmanifest",
   alternates: {
@@ -68,6 +73,9 @@ export const metadata: Metadata = {
     capable: true,
     title: SITE_NAME,
     statusBarStyle: "default",
+  },
+  other: {
+    "alternate-name": SITE_ALTERNATE_NAMES,
   },
 };
 
