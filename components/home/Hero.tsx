@@ -68,7 +68,7 @@ export default function Hero() {
         <div data-reveal="right" className="w-[min(100%,625px)] justify-self-center text-center [direction:rtl] lg:col-start-2 lg:justify-self-end lg:text-right">
           <div className="relative mx-auto mb-2.5 h-[112px] w-[min(100%,360px)] max-w-full shrink-0 overflow-hidden [aspect-ratio:177/55] md:h-[146px] md:w-[470px] lg:mx-0">
             <Image
-              src="/logo2-display-hero.png"
+              src="/logo2-display-hero2.png"
               alt="عوالم البيان"
               width={470}
               height={146}
